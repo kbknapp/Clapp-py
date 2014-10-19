@@ -24,7 +24,7 @@ class Clapp(object):
         self._version = version
         self._args_map = dict()
         self._valid_args = []
-        # self._raw_args = ''
+        self._raw_args = []
         self._about = about
         self._has_main = False
         if main != _null_func:
@@ -38,13 +38,11 @@ class Clapp(object):
         self._req_pos_args = []
         self._pos_args = []
         self._opts = []
-        self._num_pos_args = 0
-        self._num_req_pos_args = 0
-        self._num_req_opts = 0
 
     def start(self):
         self._add_help()
         self._add_version()
+        self._raw_args = sys.argv
 
         if len(sys.argv) > 1:
             self._context['raw_args'] = sys.argv[1:]
@@ -148,24 +146,24 @@ class Clapp(object):
             f(self._context)
         self._args_parsed = True
 
-    def _display_usage(self, no_exit=False):
+    def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
-        name.py [flags] <req_opts> [opt_opts] <req_bald_args> [bald_args]
+        name.py [flags] <req_opts> [opt_opts] <req_positional_args> [opt_positional_args]
         '''
         usage_str = ''
         if self._flags:
-            usage_str += '[-{}]'.format(''.join([self._valid_args_map[fid].short_name for fid in self._flags]))
+            usage_str += '[-{}]'.format(''.join([arg.short.strip('-') for arg in self._flags]))
         if self._opts:
-            usage_str += ' [{}]'.format(' '.join([self._valid_args_map[oid].short_name for oid in self._opts]))
+            usage_str += ' [{}]'.format(' '.join([' '.join([arg.short, arg.name]) for arg in self._opts]))
         if self._req_opts:
-            usage_str += ' <{}>'.format(' '.join([self._valid_args_map[roid].short_name for roid in self._req_opts]))
+            usage_str += ' <{}>'.format(' '.join([' '.join([arg.short, arg.name]) for arg in self._req_opts]))
         if self._req_pos_args:
-            usage_str += ' <{}>'.format(' '.join([self._valid_args_map[rpid].usage for rpid in self._req_pos_args]))
+            usage_str += ' <{}>'.format(' '.join([arg.name for arg in self._req_pos_args]))
         if self._pos_args:
-            usage_str += ' [{}]'.format(' '.join([self._valid_args_map[poid].usage for poid in self._pos_args]))
-        print('\nUSAGE:\n{} {}'.format(self.name, usage_str))
-        if not no_exit:
-            print('\nFor more information try --help or -h')
+            usage_str += ' [{}]'.format(' '.join([arg.name for arg in self._pos_args]))
+        print('\nUSAGE:\n{} {}'.format(self._raw_args[0], usage_str))
+        if exit:
+            print('\nFor more information try --help')
             sys.exit(0)
 
     def _display_help(self, context=None):
@@ -216,37 +214,24 @@ class Clapp(object):
 
     def _add_arg_to_map(self, arg):
         """Builds a dict of possible valid arguments."""
-
-        # for a in args:
-        #     if a.name in self._args_map:
-        #         raise RuntimeError('Arg.id must be unique.')
-        #     self._args_map[a.id] = a
-        #     # Get all the required options, flags, etc
-        #     if a.required:
-        #         # Only positional and options can be required (i.e. no such
-        #         # thing as mandatory flag)
-        #         if a.index:
-        #             self._num_req_pos_args += 1
-        #             self._req_pos_args.append(a.id)
-        #         else:
-        #             self._num_req_opts += 1
-        #             self._req_opts.append(a.id)
-        #     else:
-        #         if a.index:
-        #             self._num_pos_args += 1
-        #             self._pos_args.append(a.id)
-        #         elif a.needs_arg:
-        #             self._opts.append(a.id)
-        #         else:
-        #             self._flags.append(a.id)
-        #     if a.short_name:
-        #         self._args_map[a.short_name] = a
-        #         self._valid_args.append(a.short_name)
-        #     if a.long_name:
-        #         self._args_map[a.long_name] = a
-        #         self._valid_args.append(a.long_name)
-        #     if a.index:
-        #         self._valid_args_map['posarg{}'.format(a.index)] = a
+        self._args_map[arg.name] = arg
+        if arg.short:
+            self._args_map[arg.name.short] = arg
+        if arg.long:
+            self._args_map[arg.name.long] = arg
+        if arg.index:
+            self._args_map['index{}'.format(arg.index)] = arg
+            if arg.required:
+                self._req_pos_args.append(arg)
+            else:
+                self._pos_args.append(arg)
+        elif arg.required:
+            self._req_opts.append(arg)
+        else:
+            if arg.args_taken:
+                self._opts.append(arg)
+            else:
+                self._flags.append(arg)
 
     def _debug(self):
         print('Args dict:\n{}'.format(self._args))
@@ -265,21 +250,28 @@ class Clapp(object):
             self._add_arg_to_map(arg)
 
     def new_arg(self, name, long='', short='', help='', action=_null_func, index=0, args_taken=0, required=False):
-        arg = Arg(name)
-        if long:
-            arg.long = long
-        if short:
-            arg.short = short
-        if help:
-            arg.help = help
-        if action != _null_func:
-            arg.action = action
-        if args_taken:
-            arg.args_taken = args_taken
-        if required:
-            arg.required = required
-        if index:
-            arg.index = index
+        arg = Arg(name,
+                  long=long,
+                  short=short,
+                  help=help,
+                  action=action,
+                  index=index,
+                  args_taken=args_taken,
+                  required=required)
+        # if long:
+        #     arg.long = long
+        # if short:
+        #     arg.short = short
+        # if help:
+        #     arg.help = help
+        # if action != _null_func:
+        #     arg.action = action
+        # if args_taken:
+        #     arg.args_taken = args_taken
+        # if required:
+        #     arg.required = required
+        # if index:
+        #     arg.index = index
 
         self._add_arg_to_map(arg)
 
