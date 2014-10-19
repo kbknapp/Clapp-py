@@ -45,7 +45,7 @@ class Clapp(object):
     def start(self):
         self._add_help()
         self._add_version()
-        self._build_args_map()
+
         if len(sys.argv) > 1:
             self._context['raw_args'] = sys.argv[1:]
             self._do_args(sys.argv[1:])
@@ -214,7 +214,7 @@ class Clapp(object):
         print('\n{} v{}'.format(self._name, self._version))
         sys.exit(0)
 
-    def _build_args_map(self, args):
+    def _add_arg_to_map(self, arg):
         """Builds a dict of possible valid arguments."""
 
         # for a in args:
@@ -258,7 +258,30 @@ class Clapp(object):
         print('Req Pos:\n{}'.format(self._req_pos_args))
 
     def add_arg(self, arg):
-        return self.args([arg])
+        self._add_arg_to_map(arg)
+
+    def add_args(self, args):
+        for arg in args:
+            self._add_arg_to_map(arg)
+
+    def new_arg(self, name, long='', short='', help='', action=_null_func, index=0, args_taken=0, required=False):
+        arg = Arg(name)
+        if long:
+            arg.long = long
+        if short:
+            arg.short = short
+        if help:
+            arg.help = help
+        if action != _null_func:
+            arg.action = action
+        if args_taken:
+            arg.args_taken = args_taken
+        if required:
+            arg.required = required
+        if index:
+            arg.index = index
+
+        self._add_arg_to_map(arg)
 
     def _add_help(self):
         help = Arg('help')

@@ -12,11 +12,10 @@ class Arg(object):
                  required=False):
         if not id:
             raise RuntimeError('Arg(s) must have a unique id string.')
-        self._id = id
-        self._short_name = short_name.strip('-')
-        if self._short_name and len(self._short_name) > 1:
-            raise RuntimeError('Arg.short_name improper format. Must be "-h" or "h" style.')
-        self._long_name = long_name.strip('-')
+        self._short = short_name.strip('-')
+        if self._short and len(self._short) != 2:
+            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
+        self._long = long.strip('-')
         self._help = help
         self._required = required
         self._has_action = False
@@ -24,31 +23,33 @@ class Arg(object):
             self._has_action = True
         self._action = action
         self._index = index
-        self._usage = usage
-        self._needs_arg = needs_arg
+        self._name = name
+        self._args_taken = args_taken
 
     @property
-    def id(self):
-        return self._id
+    def name(self):
+        return self._name
 
     @property
-    def short_name(self):
-        return self._short_name
+    def short(self):
+        return self._short
 
-    @short_name.setter
+    @short.setter
     def short_name(self, value):
-        if len(value) > 2:
-            raise RuntimeError('Arg.short_name improper format. Must be "-h" or "h" style.')
+        if len(value) != 2:
+            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
         if value:
-            self._short_name = value.strip('-')
+            self._short = value
 
     @property
-    def long_name(self):
-        return self._long_name
+    def long(self):
+        return self._long
 
-    @long_name.setter
-    def long_name(self, value):
-        self._long_name = value.strip('-')
+    @long.setter
+    def long(self, value):
+        if not value.startswith('--'):
+            raise RuntimeError('Arg.long improper format. Must be in "--help" style.')
+        self._long = value
 
     @property
     def help(self):
@@ -82,26 +83,24 @@ class Arg(object):
 
     @property
     def index(self):
-        # if not self._usage:
-        #    raise RuntimeError('Positional arguments MUST have an Arg.usage set.')
         return self._index
 
     @index.setter
     def index(self, value):
         self._index = value
 
+    # @property
+    # def usage(self):
+    #     return self._usage
+    #
+    # @usage.setter
+    # def usage(self, value):
+    #     self._usage = value
+
     @property
-    def usage(self):
-        return self._usage
+    def args_taken(self):
+        return self._args_taken
 
-    @usage.setter
-    def usage(self, value):
-        self._usage = value
-
-    @property
-    def needs_arg(self):
-        return self._needs_arg
-
-    @needs_arg.setter
-    def needs_arg(self, value):
-        self._needs_arg = value
+    @args_taken.setter
+    def args_taken(self, value):
+        self._args_taken = value
