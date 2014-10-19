@@ -4,14 +4,14 @@ Python 3.x
 
 app.py
 
-v0.2
+v0.3.1
 
 A library for building command line applications
 '''
 import sys
-import arg
+from clapp import arg
 
-__version__ = '0.2'
+__version__ = '0.3.1'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 def _null_func(context):
@@ -43,12 +43,8 @@ class Clapp(object):
         self._num_req_opts = 0
 
     def start(self):
-        if self._needs_help():
-            self.add_arg(Arg('help', long_name='--help',
-                        help='Display help information', action=self._display_help))
-        if self._needs_version():
-            self.add_arg(Arg('version', long_name='--version',
-                        help='Display version information', action=self._display_version))
+        self._add_help()
+        self._add_version()
         self._build_args_map()
         if len(sys.argv) > 1:
             self._context['raw_args'] = sys.argv[1:]
@@ -172,7 +168,7 @@ class Clapp(object):
             print('\nFor more information try --help or -h')
             sys.exit(0)
 
-    def _display_help(self, config=None):
+    def _display_help(self, context=None):
         print('\n{} v{}\n{}'.format(self.name, self.version, self.about))
         self._display_usage(no_exit=True)
         if self._flags:
@@ -214,43 +210,43 @@ class Clapp(object):
                 print('{}\t\t{}'.format(po.usage, po.help))
         sys.exit(0)
 
-    def _display_version(self, config=None):
+    def _display_version(self, context=None):
         print('\n{} v{}'.format(self._name, self._version))
         sys.exit(0)
 
     def _build_args_map(self, args):
         """Builds a dict of possible valid arguments."""
-        for a in args:
-            if a.id in self._args_map:
-                raise RuntimeError('Arg.id must be unique.')
-            self._args_map[a.id] = a
-            # Get all the required options, flags, etc
-            if a.required:
-                # Only positional and options can be required (i.e. no such
-                # thing as mandatory flag)
-                if a.index:
-                    self._num_req_pos_args += 1
-                    self._req_pos_args.append(a.id)
-                else:
-                    self._num_req_opts += 1
-                    self._req_opts.append(a.id)
-            else:
-                if a.index:
-                    self._num_pos_args += 1
-                    self._pos_args.append(a.id)
-                elif a.needs_arg:
-                    self._opts.append(a.id)
-                else:
-                    self._flags.append(a.id)
-            if a.short_name:
-                self._args_map[a.short_name] = a
-                self._valid_args.append(a.short_name)
-            if a.long_name:
-                self._args_map[a.long_name] = a
-                self._valid_args.append(a.long_name)
-            if a.index:
-                self._valid_args_map['posarg{}'.format(a.index)] = a
 
+        # for a in args:
+        #     if a.name in self._args_map:
+        #         raise RuntimeError('Arg.id must be unique.')
+        #     self._args_map[a.id] = a
+        #     # Get all the required options, flags, etc
+        #     if a.required:
+        #         # Only positional and options can be required (i.e. no such
+        #         # thing as mandatory flag)
+        #         if a.index:
+        #             self._num_req_pos_args += 1
+        #             self._req_pos_args.append(a.id)
+        #         else:
+        #             self._num_req_opts += 1
+        #             self._req_opts.append(a.id)
+        #     else:
+        #         if a.index:
+        #             self._num_pos_args += 1
+        #             self._pos_args.append(a.id)
+        #         elif a.needs_arg:
+        #             self._opts.append(a.id)
+        #         else:
+        #             self._flags.append(a.id)
+        #     if a.short_name:
+        #         self._args_map[a.short_name] = a
+        #         self._valid_args.append(a.short_name)
+        #     if a.long_name:
+        #         self._args_map[a.long_name] = a
+        #         self._valid_args.append(a.long_name)
+        #     if a.index:
+        #         self._valid_args_map['posarg{}'.format(a.index)] = a
 
     def _debug(self):
         print('Args dict:\n{}'.format(self._args))
@@ -264,17 +260,51 @@ class Clapp(object):
     def add_arg(self, arg):
         return self.args([arg])
 
-    def _needs_help(self):
-        for a in self._args_map.values():
-            if a.long_name.strip('-') == 'version':
-                return False
-        return True
+    def _add_help(self):
+        help = Arg('help')
+        help.action = self._display_help()
+        help.help = 'Display help information'
 
-    def _needs_version(self):
-        for a in self._args_map.values():
-            if a.long_name.strip('-') == 'help':
-                return False
-        return True
+        has_long = False
+        has_short = False
+        has_help = False
+        for name in self._args_map:
+            if self._args_map[name].long == 'help':
+                has_long = True
+                has_help = True
+            if self._args_map[name].short == 'h':
+                has_short = True
+        if has_help:
+            return
+        if not has_short:
+            help.short = '-h'
+        if not has_long:
+            help.long = '--help'
+
+        self.add_arg(help)
+
+    def _add_version(self):
+        version = Arg('version')
+        version.action = self._display_version()
+        version.help = 'Display version information'
+
+        has_long = False
+        has_short = False
+        has_version = False
+        for name in self._args_map:
+            if self._args_map[name].long == 'version':
+                has_long = True
+                has_version = True
+            if self._args_map[name].short == 'v':
+                has_short = True
+        if has_version:
+            return
+        if not has_short:
+            help.short = '-v'
+        if not has_long:
+            help.long = '--version'
+
+        self.add_arg(version)
 
     # Properties
     @property
@@ -293,15 +323,15 @@ class Clapp(object):
     def version(self, value):
         self._version = value
 
-    @property
-    def args(self):
-        return list(set(self._valid_args_map.values()))
-
-    @args.setter
-    def args(self, value):
-        self._args_parsed = False
-        if value:
-            self._build_args_map(value)
+    # @property
+    # def args(self):
+    #     return list(set(self._valid_args_map.values()))
+    #
+    # @args.setter
+    # def args(self, value):
+    #     self._args_parsed = False
+    #     if value:
+    #         self._build_args_map(value)
 
     @property
     def about(self):

@@ -2,15 +2,14 @@ __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 class Arg(object):
     def __init__(self,
-                 id,
-                 short_name='',
-                 long_name='',
+                 name,
+                 short='',
+                 long='',
                  help='',
-                 usage='',
-                 required=False,
+                 args_taken=0,
                  action=_null_func,
                  index=0,
-                 needs_arg=False):
+                 required=False):
         if not id:
             raise RuntimeError('Arg(s) must have a unique id string.')
         self._id = id
