@@ -1,0 +1,14 @@
+*optional positional:
+	fake file
+
+flag:
+	fake -f
+	fake --file
+
+*option with arg:
+    fake -f file
+    fake -ffile
+    fake --file=file
+    fake --file file
+
+* Can be required
