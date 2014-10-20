@@ -3,10 +3,13 @@
 # Simply import the lib
 import clapp
 
-# is used as the action when -o <file> is passed to the app
+# This is used as the action when -o <file>
+# is passed to the app.
+# When options take additional arguments they
+# are given a list (in this case we only expect)
+# a single value so [0] is used
 def do_output(context):
     print('-o was passed the file: ', context['-o'][0])
-
 
 def my_main(context):
     """ The starting point for your app."""
@@ -19,11 +22,9 @@ def my_main(context):
     return 0
 
 if __name__ == '__main__':
-    # Create a command line argument, can also used keyword arguments
-    # All actions should take one dict() as it will be passed a dict() with config info
-    # and will be executed PRIOR to your main()
-    # your main() should accept a dict() with config
-    # It will be executed AFTER all actions have returned
+    # Create a command line argument (can also use keyword arguments)
+    # All actions should take one dict() as it will be passed a dict()
+    # with context and will be executed PRIOR to your main()
     arg1 = clapp.Arg('out_file')
     arg1.short = '-o'
     arg1.long ='--output'
@@ -51,10 +52,12 @@ if __name__ == '__main__':
     arg3.help = 'Print debugging info'
 
 
-    # Create an var of type Clapp and set the properties
+    # Create an var of type clapp.App and set the properties
+    # Could also use App(name='MyApp', version='1.0', about='Example CLI application')
+    # etc. etc.
     #
-    # Could also use Clapp(name='MyApp', version='1.0', about='Example CLI application') etc. etc.
-    # You can call the atributes in any order, but start() MUST be called last
+    # Your main() should accept a dict() with which is the context
+    # It will be executed AFTER all actions have returned
     app = clapp.App()
     app.name = 'MyApp'
     app.version = '1.0'
