@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/clapp.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Clapp-py.iws" />
@@ -410,7 +410,11 @@
       <created>1413830846284</created>
       <updated>1413830846284</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Removed commented out code">
+      <created>1413830890150</created>
+      <updated>1413830890150</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -459,7 +463,8 @@
     <MESSAGE value="Update version to 0.3.3" />
     <MESSAGE value="context now contains name, short, and long all with the same value" />
     <MESSAGE value="Fixed bug when processing flags" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug when processing flags" />
+    <MESSAGE value="Removed commented out code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed commented out code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
