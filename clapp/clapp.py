@@ -11,7 +11,7 @@ A library for building command line applications
 import sys
 from os import path
 
-__version__ = '0.3.4'
+__version__ = '0.3.5'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -102,8 +102,12 @@ class App(object):
                     self._context[argo.long] = taken_args
                 skip_next = True
                 num_to_skip = argo.args_taken
-            elif arg in self._flags:
+            elif argo in self._flags:
                 self._context[argo.name] = True
+                if argo.short:
+                    self._context[argo.short] = True
+                if argo.long:
+                    self._context[argo.long] = True
             if argo.has_action:
                 actions_todo.append(argo.action)
 
@@ -119,6 +123,13 @@ class App(object):
                 else:
                     display_name = arg.short
                 print('Argument error.\nRequired option {} not found.'.format(display_name))
+        for flag in self._flags:
+            if flag.name not in self._context:
+                self._context[flag.name] = False
+                if flag.short:
+                    self._context[flag.short] = False
+                if flag.long:
+                    self._context[flag.long] = False
 
         for act in actions_todo:
             act(self._context)
