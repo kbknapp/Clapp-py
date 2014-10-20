@@ -39,19 +39,17 @@ FLAGS:
 ### Adding Additional Arguments
 Additional arguments can be added using the following (note keyword arguments can be used in the constructor instead of properties)
 ```python
-arg1 = clapp.Arg()
+arg1 = clapp.Arg('out_file')
 arg1.short = '-o'
 arg1.long = '--output'
 arg1.needs_arg = True
-arg1.name = 'out_file'
 arg1.help = 'The output file used by MyApp'
 
-arg2 = clapp.Arg()
+arg2 = clapp.Arg('in_file')
 arg2.short = '-i'
 arg2.long = '--in'
 arg2.required = True
 arg2.args_taken = 1
-arg2.name = 'in_file'
 arg2.help = 'The input file used by MyApp'
 
 # Add args to app
@@ -61,9 +59,8 @@ app.start()
 ```
 Adding positional arguments is just as easy (note when using positional arguments, you **MUST** set the `name` property)
 ```python
-arg3 = clapp.Arg()
+arg3 = clapp.Arg('config_file')
 arg3.index = 1
-arg3.name = 'config_file'
 arg3.help = 'The config file used by MyApp'
 
 app.add_arg(arg3)
@@ -79,7 +76,7 @@ You can add custom handlers (functions) for when certain switches are used. i.e.
 def some_action(context):
     print('My action!')
 
-arg4 = clapp.Arg()
+arg4 = clapp.Arg('do_action')
 arg4.short = '-a'
 arg4.help = 'Perform some special action'
 arg4.action = some_action
