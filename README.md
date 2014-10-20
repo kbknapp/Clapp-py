@@ -1,6 +1,6 @@
 # Clapp-py
 
-An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches and arguments. `clapp` is designed as a learning platform, not to replace argparse.
+An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches and arguments.
 
 ## Use
 
