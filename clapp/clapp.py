@@ -68,14 +68,18 @@ class App(object):
                 arg, next_arg = arg.split('=')
                 args.insert(i+1, next_arg)
 
-            if arg not in self._args_map and possible_pos_args:
-                pos_args += 1
-                index = 'index{}'.format(pos_args)
-                self._context[self._args_map[index].name] = arg
-                arg = self._args_map[index].name
-            elif not possible_pos_args:
-                print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
-                self._display_usage(exit=True)
+            if arg not in self._args_map:
+                if possible_pos_args and arg[0] != '-':
+                    pos_args += 1
+                    index = 'index{}'.format(pos_args)
+                    self._context[self._args_map[index].name] = arg
+                    arg = self._args_map[index].name
+                elif not possible_pos_args:
+                    print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
+                    self._display_usage(exit=True)
+                else:
+                    print('Argument error from {}\n{} doesn\'t accept any arguments like {}.'.format(arg, self._raw_args[0], arg))
+                    self._display_usage(exit=True)
 
             argo = self._args_map[arg]
             if argo.args_taken:
