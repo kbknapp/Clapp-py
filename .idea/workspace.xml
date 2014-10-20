@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/clapp/arg.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/clapp/app.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/main.py" afterPath="$PROJECT_DIR$/examples/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -31,16 +30,18 @@
       <file leaf-file-name="clapp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24827586" vertical-offset="0" max-vertical-offset="7560">
-              <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.48472905" vertical-offset="768" max-vertical-offset="6510">
+              <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
               <folding>
-                <element signature="e#5998#6069#0" expanded="false" />
-                <element signature="e#6793#7142#0" expanded="false" />
-                <element signature="e#7180#7205#0" expanded="false" />
-                <element signature="e#7245#7299#0" expanded="false" />
-                <element signature="e#7424#8104#0" expanded="false" />
-                <element signature="e#8139#8741#0" expanded="false" />
-                <element signature="e#8779#9417#0" expanded="false" />
+                <element signature="e#109#119#0" expanded="true" />
+                <element signature="e#344#852#0" expanded="false" />
+                <element signature="e#4765#6368#0" expanded="false" />
+                <element signature="e#6424#6495#0" expanded="false" />
+                <element signature="e#6541#7187#0" expanded="false" />
+                <element signature="e#7219#7568#0" expanded="false" />
+                <element signature="e#7606#7631#0" expanded="false" />
+                <element signature="e#7671#7725#0" expanded="false" />
+                <element signature="e#7850#8530#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,8 +50,8 @@
       <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="329" max-vertical-offset="1344">
-              <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1344">
+              <caret line="7" column="59" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -192,13 +193,33 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings />
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Clapp-py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/main.py" />
+      <option name="PARAMETERS" value="-h" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <method />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -320,7 +341,14 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <list size="0" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Python.main" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -356,7 +384,11 @@
       <created>1413764485875</created>
       <updated>1413764485875</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Re-write of clapp">
+      <created>1413819318595</created>
+      <updated>1413819318595</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -366,16 +398,16 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.095744684" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32919848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32937366" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39980915" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -401,11 +433,12 @@
     <MESSAGE value="Re-write Initial Commit" />
     <MESSAGE value="Re-write of Arg" />
     <MESSAGE value="Re-write of App" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-write of App" />
+    <MESSAGE value="Re-write of clapp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Re-write of clapp" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -414,13 +447,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3507">
           <caret line="76" column="46" selection-start-line="76" selection-start-column="46" selection-end-line="76" selection-end-column="46" />
           <folding>
-            <element signature="e#5998#6069#0" expanded="false" />
-            <element signature="e#6793#7142#0" expanded="false" />
-            <element signature="e#7180#7205#0" expanded="false" />
-            <element signature="e#7245#7299#0" expanded="false" />
-            <element signature="e#7424#8104#0" expanded="false" />
-            <element signature="e#8139#8741#0" expanded="false" />
-            <element signature="e#8779#9417#0" expanded="false" />
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#4765#6368#0" expanded="false" />
+            <element signature="e#6424#6495#0" expanded="false" />
+            <element signature="e#6541#7187#0" expanded="false" />
+            <element signature="e#7219#7568#0" expanded="false" />
+            <element signature="e#7606#7631#0" expanded="false" />
+            <element signature="e#7671#7725#0" expanded="false" />
+            <element signature="e#7850#8530#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -430,13 +465,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3507">
           <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
           <folding>
-            <element signature="e#5998#6069#0" expanded="false" />
-            <element signature="e#6793#7142#0" expanded="false" />
-            <element signature="e#7180#7205#0" expanded="false" />
-            <element signature="e#7245#7299#0" expanded="false" />
-            <element signature="e#7424#8104#0" expanded="false" />
-            <element signature="e#8139#8741#0" expanded="false" />
-            <element signature="e#8779#9417#0" expanded="false" />
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#4765#6368#0" expanded="false" />
+            <element signature="e#6424#6495#0" expanded="false" />
+            <element signature="e#6541#7187#0" expanded="false" />
+            <element signature="e#7219#7568#0" expanded="false" />
+            <element signature="e#7606#7631#0" expanded="false" />
+            <element signature="e#7671#7725#0" expanded="false" />
+            <element signature="e#7850#8530#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -446,13 +483,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3507">
           <caret line="67" column="53" selection-start-line="67" selection-start-column="53" selection-end-line="67" selection-end-column="53" />
           <folding>
-            <element signature="e#5998#6069#0" expanded="false" />
-            <element signature="e#6793#7142#0" expanded="false" />
-            <element signature="e#7180#7205#0" expanded="false" />
-            <element signature="e#7245#7299#0" expanded="false" />
-            <element signature="e#7424#8104#0" expanded="false" />
-            <element signature="e#8139#8741#0" expanded="false" />
-            <element signature="e#8779#9417#0" expanded="false" />
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#4765#6368#0" expanded="false" />
+            <element signature="e#6424#6495#0" expanded="false" />
+            <element signature="e#6541#7187#0" expanded="false" />
+            <element signature="e#7219#7568#0" expanded="false" />
+            <element signature="e#7606#7631#0" expanded="false" />
+            <element signature="e#7671#7725#0" expanded="false" />
+            <element signature="e#7850#8530#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -462,13 +501,15 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6675">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5998#6069#0" expanded="false" />
-            <element signature="e#6793#7142#0" expanded="false" />
-            <element signature="e#7180#7205#0" expanded="false" />
-            <element signature="e#7245#7299#0" expanded="false" />
-            <element signature="e#7424#8104#0" expanded="false" />
-            <element signature="e#8139#8741#0" expanded="false" />
-            <element signature="e#8779#9417#0" expanded="false" />
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#4765#6368#0" expanded="false" />
+            <element signature="e#6424#6495#0" expanded="false" />
+            <element signature="e#6541#7187#0" expanded="false" />
+            <element signature="e#7219#7568#0" expanded="false" />
+            <element signature="e#7606#7631#0" expanded="false" />
+            <element signature="e#7671#7725#0" expanded="false" />
+            <element signature="e#7850#8530#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -482,24 +523,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="329" max-vertical-offset="1344">
-          <caret line="57" column="0" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1344">
+          <caret line="7" column="59" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24827586" vertical-offset="0" max-vertical-offset="7560">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.48472905" vertical-offset="768" max-vertical-offset="6510">
+          <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
           <folding>
-            <element signature="e#5998#6069#0" expanded="false" />
-            <element signature="e#6793#7142#0" expanded="false" />
-            <element signature="e#7180#7205#0" expanded="false" />
-            <element signature="e#7245#7299#0" expanded="false" />
-            <element signature="e#7424#8104#0" expanded="false" />
-            <element signature="e#8139#8741#0" expanded="false" />
-            <element signature="e#8779#9417#0" expanded="false" />
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#4765#6368#0" expanded="false" />
+            <element signature="e#6424#6495#0" expanded="false" />
+            <element signature="e#6541#7187#0" expanded="false" />
+            <element signature="e#7219#7568#0" expanded="false" />
+            <element signature="e#7606#7631#0" expanded="false" />
+            <element signature="e#7671#7725#0" expanded="false" />
+            <element signature="e#7850#8530#0" expanded="false" />
           </folding>
         </state>
       </provider>

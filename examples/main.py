@@ -5,7 +5,7 @@ import clapp
 
 # is used as the action when -o <file> is passed to the app
 def do_output(context):
-    print('-o was passed the file: ', context['out'])
+    print('-o was passed the file: ', context['out_file'][0])
 
 
 def my_main(context):

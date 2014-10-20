@@ -9,6 +9,7 @@ v0.3.1
 A library for building command line applications
 '''
 import sys
+from os import path
 
 __version__ = '0.3.2'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
@@ -65,16 +66,23 @@ class App(object):
                 pos_args += 1
                 index = 'index{}'.format(pos_args)
                 self._context[self._args_map[index].name] = arg
-            else:
+            elif not possible_pos_args:
                 print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
                 self._display_usage(exit=True)
+            if arg.find('=') != -1:
+                arg, next_arg = arg.split('=')
+                args.insert(i+1, next_arg)
             argo = self._args_map[arg]
             if argo.args_taken:
+                if i+1 == len(args):
+                    print('Argument error from {}\n{} expected {} arguments but received 0.'
+                              .format(arg, arg, argo.args_taken))
+                    self._display_usage(exit=True)
                 taken_args = []
                 for j in range(argo.args_taken):
-                    possible_arg = sys.argv[i + 1 + j]
+                    possible_arg = args[i + 1 + j]
                     if possible_arg.startswith('-'):
-                        print('Argument error from {}\n{} expected {} arguments but only got {}.'
+                        print('Argument error from {}\n{} expected {} arguments but received {}.'
                               .format(possible_arg, arg, argo.args_taken, len(taken_args)))
                         self._display_usage(exit=True)
                     taken_args.append(possible_arg)
@@ -117,7 +125,7 @@ class App(object):
             usage_str += ' <{}>'.format(' '.join([arg.name for arg in self._req_pos_args]))
         if self._pos_args:
             usage_str += ' [{}]'.format(' '.join([arg.name for arg in self._pos_args]))
-        print('\nUSAGE:\n{} {}'.format(self._raw_args[0], usage_str))
+        print('\nUSAGE:\n{} {}'.format(path.basename(self._raw_args[0]), usage_str))
         if exit:
             print('\nFor more information try --help')
             sys.exit(0)
@@ -233,48 +241,35 @@ class App(object):
 
     def _add_help(self):
         help = Arg('help')
-        help.action = self._display_help()
+        help.action = self._display_help
         help.help = 'Display help information'
 
-        has_long = False
         has_short = False
-        has_help = False
-        for name in self._args_map:
-            if self._args_map[name].long == 'help':
-                has_long = True
-                has_help = True
-            if self._args_map[name].short == 'h':
+        for arg in set(self._args_map.values()):
+            if arg.long == '--help':
+                return
+            if arg.short == '-h':
                 has_short = True
-        if has_help:
-            return
         if not has_short:
             help.short = '-h'
-        if not has_long:
-            help.long = '--help'
-
+        help.long = '--help'
         self.add_arg(help)
 
     def _add_version(self):
         version = Arg('version')
-        version.action = self._display_version()
+        version.action = self._display_version
         version.help = 'Display version information'
 
-        has_long = False
         has_short = False
-        has_version = False
-        for name in self._args_map:
-            if self._args_map[name].long == 'version':
-                has_long = True
-                has_version = True
-            if self._args_map[name].short == 'v':
+        for arg in set(self._args_map.values()):
+            if arg.long == '--version':
+                return
+            if arg.short == '-v':
                 has_short = True
-        if has_version:
-            return
-        if not has_short:
-            help.short = '-v'
-        if not has_long:
-            help.long = '--version'
 
+        if not has_short:
+            version.short = '-v'
+        version.long = '--version'
         self.add_arg(version)
 
     # Properties
@@ -293,16 +288,6 @@ class App(object):
     @version.setter
     def version(self, value):
         self._version = value
-
-    # @property
-    # def args(self):
-    #     return list(set(self._valid_args_map.values()))
-    #
-    # @args.setter
-    # def args(self, value):
-    #     self._args_parsed = False
-    #     if value:
-    #         self._build_args_map(value)
 
     @property
     def about(self):
@@ -337,8 +322,8 @@ class Arg(object):
                  action=_null_func,
                  index=0,
                  required=False):
-        if not id:
-            raise RuntimeError('Arg(s) must have a unique id string.')
+        if not name:
+            raise RuntimeError('Arg(name) must have a unique name string.')
         self._short = short
         if self._short and len(self._short) != 2:
             raise RuntimeError('Arg.short improper format. Must be "-h" style.')
