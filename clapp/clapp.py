@@ -425,14 +425,6 @@ class Arg(object):
     def index(self, value):
         self._index = value
 
-    # @property
-    # def usage(self):
-    #     return self._usage
-    #
-    # @usage.setter
-    # def usage(self, value):
-    #     self._usage = value
-
     @property
     def args_taken(self):
         return self._args_taken

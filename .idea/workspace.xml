@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="context now contains name, short, and long all with the same value">
+    <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/main.py" afterPath="$PROJECT_DIR$/examples/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Clapp-py.iws" />
@@ -30,8 +29,8 @@
       <file leaf-file-name="clapp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="7413">
-              <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+            <state vertical-scroll-proportion="6.8689656" vertical-offset="0" max-vertical-offset="7245">
+              <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
               <folding>
                 <element signature="e#109#119#0" expanded="true" />
                 <element signature="e#344#852#0" expanded="false" />
@@ -407,7 +406,11 @@
       <created>1413830178686</created>
       <updated>1413830178686</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed bug when processing flags">
+      <created>1413830846284</created>
+      <updated>1413830846284</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -455,7 +458,8 @@
     <MESSAGE value="Re-write of clapp" />
     <MESSAGE value="Update version to 0.3.3" />
     <MESSAGE value="context now contains name, short, and long all with the same value" />
-    <option name="LAST_COMMIT_MESSAGE" value="context now contains name, short, and long all with the same value" />
+    <MESSAGE value="Fixed bug when processing flags" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed bug when processing flags" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -556,8 +560,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="7413">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        <state vertical-scroll-proportion="6.8689656" vertical-offset="0" max-vertical-offset="7245">
+          <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
