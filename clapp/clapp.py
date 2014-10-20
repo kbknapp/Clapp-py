@@ -11,7 +11,7 @@ A library for building command line applications
 import sys
 from os import path
 
-__version__ = '0.3.5'
+__version__ = '0.3.6'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -67,6 +67,13 @@ class App(object):
             if arg.find('=') != -1:
                 arg, next_arg = arg.split('=')
                 args.insert(i+1, next_arg)
+
+            if not arg.startswith('--') and arg[0] == '-' and len(arg) > 2:
+                for j, char in enumerate(arg):
+                    if char == '-':
+                        continue
+                    args.insert(i + 1 + j, '-{}'.format(char))
+                continue
 
             if arg not in self._args_map:
                 if possible_pos_args and arg[0] != '-':

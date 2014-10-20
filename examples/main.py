@@ -14,7 +14,7 @@ def do_output(context):
 def my_main(context):
     """ The starting point for your app."""
     print('starting MyApp...')
-    if context['verbosity']:
+    if context['debug']:
         print('Context:')
         for k in context:
             print('Key: {}\nValue: {}'.format(k, context[k]))
@@ -32,7 +32,6 @@ if __name__ == '__main__':
     arg1.help = 'The output file'
     arg1.action = do_output
 
-
     # index starts at 1 **NOT** 0 based. Positional
     # args **MUST** have 'usage' property set
     # usage is for displaying help info and should
@@ -46,12 +45,15 @@ if __name__ == '__main__':
     arg2.required = True
 
     # Creating a true/false flag is easy too
-    arg3 = clapp.Arg('verbosity')
-    arg3.short = '-v'
-    arg3.long = '--verbose'
+    arg3 = clapp.Arg('debug')
+    arg3.short = '-d'
+    arg3.long = '--debug'
     arg3.help = 'Print debugging info'
 
-
+    arg4 = clapp.Arg('flag')
+    arg4.short = '-f'
+    arg4.long = '--flag'
+    arg4.help = 'Use some special flag'
     # Create an var of type clapp.App and set the properties
     # Could also use App(name='MyApp', version='1.0', about='Example CLI application')
     # etc. etc.
@@ -63,6 +65,6 @@ if __name__ == '__main__':
     app.version = '1.0'
     app.about = 'Testing a command line app'
     app.main = my_main
-    app.add_args([arg1, arg2, arg3])
+    app.add_args([arg1, arg2, arg3, arg4])
 
     app.start()
