@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
+    <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="Update version to 0.3.3">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/main.py" afterPath="$PROJECT_DIR$/examples/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Clapp-py.iws" />
@@ -29,18 +30,18 @@
       <file leaf-file-name="clapp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="6699">
+            <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="6783">
               <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
               <folding>
                 <element signature="e#109#119#0" expanded="true" />
                 <element signature="e#344#852#0" expanded="false" />
-                <element signature="e#5172#6775#0" expanded="false" />
-                <element signature="e#6831#6902#0" expanded="false" />
-                <element signature="e#6948#7594#0" expanded="false" />
-                <element signature="e#7626#7975#0" expanded="false" />
-                <element signature="e#8013#8038#0" expanded="false" />
-                <element signature="e#8078#8132#0" expanded="false" />
-                <element signature="e#8257#8937#0" expanded="false" />
+                <element signature="e#5350#6953#0" expanded="false" />
+                <element signature="e#7009#7080#0" expanded="false" />
+                <element signature="e#7126#7772#0" expanded="false" />
+                <element signature="e#7804#8153#0" expanded="false" />
+                <element signature="e#8191#8216#0" expanded="false" />
+                <element signature="e#8256#8310#0" expanded="false" />
+                <element signature="e#8435#9115#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,8 +50,8 @@
       <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1344">
-              <caret line="7" column="59" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="1344">
+              <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -399,7 +400,11 @@
       <created>1413829940422</created>
       <updated>1413829940422</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Update version to 0.3.3">
+      <created>1413829962946</created>
+      <updated>1413829962946</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -445,7 +450,8 @@
     <MESSAGE value="Re-write of Arg" />
     <MESSAGE value="Re-write of App" />
     <MESSAGE value="Re-write of clapp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-write of clapp" />
+    <MESSAGE value="Update version to 0.3.3" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update version to 0.3.3" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -460,13 +466,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5172#6775#0" expanded="false" />
-            <element signature="e#6831#6902#0" expanded="false" />
-            <element signature="e#6948#7594#0" expanded="false" />
-            <element signature="e#7626#7975#0" expanded="false" />
-            <element signature="e#8013#8038#0" expanded="false" />
-            <element signature="e#8078#8132#0" expanded="false" />
-            <element signature="e#8257#8937#0" expanded="false" />
+            <element signature="e#5350#6953#0" expanded="false" />
+            <element signature="e#7009#7080#0" expanded="false" />
+            <element signature="e#7126#7772#0" expanded="false" />
+            <element signature="e#7804#8153#0" expanded="false" />
+            <element signature="e#8191#8216#0" expanded="false" />
+            <element signature="e#8256#8310#0" expanded="false" />
+            <element signature="e#8435#9115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -478,13 +484,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5172#6775#0" expanded="false" />
-            <element signature="e#6831#6902#0" expanded="false" />
-            <element signature="e#6948#7594#0" expanded="false" />
-            <element signature="e#7626#7975#0" expanded="false" />
-            <element signature="e#8013#8038#0" expanded="false" />
-            <element signature="e#8078#8132#0" expanded="false" />
-            <element signature="e#8257#8937#0" expanded="false" />
+            <element signature="e#5350#6953#0" expanded="false" />
+            <element signature="e#7009#7080#0" expanded="false" />
+            <element signature="e#7126#7772#0" expanded="false" />
+            <element signature="e#7804#8153#0" expanded="false" />
+            <element signature="e#8191#8216#0" expanded="false" />
+            <element signature="e#8256#8310#0" expanded="false" />
+            <element signature="e#8435#9115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -496,13 +502,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5172#6775#0" expanded="false" />
-            <element signature="e#6831#6902#0" expanded="false" />
-            <element signature="e#6948#7594#0" expanded="false" />
-            <element signature="e#7626#7975#0" expanded="false" />
-            <element signature="e#8013#8038#0" expanded="false" />
-            <element signature="e#8078#8132#0" expanded="false" />
-            <element signature="e#8257#8937#0" expanded="false" />
+            <element signature="e#5350#6953#0" expanded="false" />
+            <element signature="e#7009#7080#0" expanded="false" />
+            <element signature="e#7126#7772#0" expanded="false" />
+            <element signature="e#7804#8153#0" expanded="false" />
+            <element signature="e#8191#8216#0" expanded="false" />
+            <element signature="e#8256#8310#0" expanded="false" />
+            <element signature="e#8435#9115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -514,13 +520,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5172#6775#0" expanded="false" />
-            <element signature="e#6831#6902#0" expanded="false" />
-            <element signature="e#6948#7594#0" expanded="false" />
-            <element signature="e#7626#7975#0" expanded="false" />
-            <element signature="e#8013#8038#0" expanded="false" />
-            <element signature="e#8078#8132#0" expanded="false" />
-            <element signature="e#8257#8937#0" expanded="false" />
+            <element signature="e#5350#6953#0" expanded="false" />
+            <element signature="e#7009#7080#0" expanded="false" />
+            <element signature="e#7126#7772#0" expanded="false" />
+            <element signature="e#7804#8153#0" expanded="false" />
+            <element signature="e#8191#8216#0" expanded="false" />
+            <element signature="e#8256#8310#0" expanded="false" />
+            <element signature="e#8435#9115#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -532,28 +538,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/map.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1015">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/examples/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1344">
-          <caret line="7" column="59" selection-start-line="7" selection-start-column="59" selection-end-line="7" selection-end-column="59" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="63" max-vertical-offset="1344">
+          <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="6699">
+        <state vertical-scroll-proportion="0.2689655" vertical-offset="0" max-vertical-offset="6783">
           <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5172#6775#0" expanded="false" />
-            <element signature="e#6831#6902#0" expanded="false" />
-            <element signature="e#6948#7594#0" expanded="false" />
-            <element signature="e#7626#7975#0" expanded="false" />
-            <element signature="e#8013#8038#0" expanded="false" />
-            <element signature="e#8078#8132#0" expanded="false" />
-            <element signature="e#8257#8937#0" expanded="false" />
+            <element signature="e#5350#6953#0" expanded="false" />
+            <element signature="e#7009#7080#0" expanded="false" />
+            <element signature="e#7126#7772#0" expanded="false" />
+            <element signature="e#7804#8153#0" expanded="false" />
+            <element signature="e#8191#8216#0" expanded="false" />
+            <element signature="e#8256#8310#0" expanded="false" />
+            <element signature="e#8435#9115#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -11,7 +11,7 @@ A library for building command line applications
 import sys
 from os import path
 
-__version__ = '0.3.3'
+__version__ = '0.3.4'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -96,6 +96,10 @@ class App(object):
                         self._display_usage(exit=True)
                     taken_args.append(possible_arg)
                 self._context[argo.name] = taken_args
+                if argo.short:
+                    self._context[argo.short] = taken_args
+                if argo.long:
+                    self._context[argo.long] = taken_args
                 skip_next = True
                 num_to_skip = argo.args_taken
             elif arg in self._flags:
