@@ -257,20 +257,6 @@ class App(object):
                   index=index,
                   args_taken=args_taken,
                   required=required)
-        # if long:
-        #     arg.long = long
-        # if short:
-        #     arg.short = short
-        # if help:
-        #     arg.help = help
-        # if action != _null_func:
-        #     arg.action = action
-        # if args_taken:
-        #     arg.args_taken = args_taken
-        # if required:
-        #     arg.required = required
-        # if index:
-        #     arg.index = index
 
         self._add_arg_to_map(arg)
 
