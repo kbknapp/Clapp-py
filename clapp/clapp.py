@@ -2,29 +2,29 @@
 '''
 Python 3.x
 
-app.py
+clapp.py
 
 v0.3.1
 
 A library for building command line applications
 '''
 import sys
-from clapp import arg
 
-__version__ = '0.3.1'
+__version__ = '0.3.2'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
+
 
 def _null_func(context):
     pass
 
 
-class Clapp(object):
+class App(object):
     def __init__(self, name='', version='', about='', main=_null_func):
         self._name = name
         self._version = version
         self._args_map = dict()
         self._valid_args = []
-        self._raw_args = []
+        self._raw_args = sys.argv
         self._about = about
         self._has_main = False
         if main != _null_func:
@@ -42,7 +42,6 @@ class Clapp(object):
     def start(self):
         self._add_help()
         self._add_version()
-        self._raw_args = sys.argv
 
         if len(sys.argv) > 1:
             self._context['raw_args'] = sys.argv
@@ -55,10 +54,12 @@ class Clapp(object):
         actions_todo = []
         pos_args = 0
         skip_next = False
+        num_to_skip = 0
         possible_pos_args = len(self._pos_args) + len(self._req_pos_args)
 
         for i, arg in enumerate(args):
-            if skip_next:
+            if skip_next and num_to_skip > 0:
+                num_to_skip -= 1
                 continue
             if arg not in self._args_map and possible_pos_args:
                 pos_args += 1
@@ -68,9 +69,38 @@ class Clapp(object):
                 print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
                 self._display_usage(exit=True)
             argo = self._args_map[arg]
-            self._context[argo.name] = True
+            if argo.args_taken:
+                taken_args = []
+                for j in range(argo.args_taken):
+                    possible_arg = sys.argv[i + 1 + j]
+                    if possible_arg.startswith('-'):
+                        print('Argument error from {}\n{} expected {} arguments but only got {}.'
+                              .format(possible_arg, arg, argo.args_taken, len(taken_args)))
+                        self._display_usage(exit=True)
+                    taken_args.append(possible_arg)
+                self._context[argo.name] = taken_args
+                skip_next = True
+                num_to_skip = argo.args_taken
+            else:
+                self._context[argo.name] = True
+            if argo.has_action:
+                actions_todo.append(argo.action)
 
+        if pos_args >= len(self._req_pos_args):
+            print('Argument error.\nRequired number of positional arguments not found.')
+            self._display_usage(exit=True)
 
+        for arg in self._req_opts:
+            if arg.name not in self._context:
+                display_name = ''
+                if arg.long:
+                    display_name = arg.long
+                else:
+                    display_name = arg.short
+                print('Argument error.\nRequired option {} not found.'.format(display_name))
+
+        for act in actions_todo:
+            act(self._context)
 
     def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
@@ -98,39 +128,39 @@ class Clapp(object):
         if self._flags:
             print('\nFLAGS:')
             for f in self._flags:
-                a = self._args[f]
-                print(a.short, end='')
-                if a.short and a.long:
+                # a = self._args_map[f]
+                print(f.short, end='')
+                if f.short and f.long:
                     print(',', end='')
                 else:
                     print('\t', end='')
-                print('{}\t\t{}'.format(a.long, a.help))
+                print('{}\t\t{}'.format(f.long, f.help))
 
         if self._opts:
             print('\nOPTIONS:')
-            for f in self._opts:
-                o = self._args[f[0:f.find(' ')]]
+            for o in self._opts:
+                # o = self._args[f[0:f.find(' ')]]
                 print(o.short, end='')
                 if o.short and o.long:
                     print(',', end='')
                 print('{}={}\t{}'.format(o.long, o.name, o.help))
         if self._req_opts:
             print('\nREQUIRED OPTIONS:')
-            for f in self._req_opts:
-                ro = self._args[f[0:f.find(' ')]]
+            for ro in self._req_opts:
+                # ro = self._args[f[0:f.find(' ')]]
                 print(ro.short, end='')
                 if ro.short and ro.long:
                     print(',', end='')
                 print('{}={}\t\t{}'.format(ro.long, ro.name, ro.help))
         if self._req_pos_args:
             print('\nREQUIRED POSITIONAL ARGUMENTS:')
-            for f in self._req_pos_args:
-                rpo = self._args[f]
+            for rpo in self._req_pos_args:
+                # rpo = self._args[f]
                 print('{}\t\t{}'.format(rpo.name, rpo.help))
         if self._pos_args:
             print('\nOPTIONAL POSITIONAL ARGUMENTS:')
-            for f in self._pos_args:
-                po = self._args[f]
+            for po in self._pos_args:
+                # po = self._args[f]
                 print('{}\t\t{}'.format(po.name, po.help))
         sys.exit(0)
 
@@ -142,9 +172,9 @@ class Clapp(object):
         """Builds a dict of possible valid arguments."""
         self._args_map[arg.name] = arg
         if arg.short:
-            self._args_map[arg.name.short] = arg
+            self._args_map[arg.short] = arg
         if arg.long:
-            self._args_map[arg.name.long] = arg
+            self._args_map[arg.long] = arg
         if arg.index:
             self._args_map['index{}'.format(arg.index)] = arg
             if arg.required:
@@ -296,3 +326,108 @@ class Clapp(object):
             self._has_main = True
         self._main = value
 
+
+class Arg(object):
+    def __init__(self,
+                 name,
+                 short='',
+                 long='',
+                 help='',
+                 args_taken=0,
+                 action=_null_func,
+                 index=0,
+                 required=False):
+        if not id:
+            raise RuntimeError('Arg(s) must have a unique id string.')
+        self._short = short
+        if self._short and len(self._short) != 2:
+            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
+        self._long = long
+        self._help = help
+        self._required = required
+        self._has_action = False
+        if action != _null_func:
+            self._has_action = True
+        self._action = action
+        self._index = index
+        self._name = name
+        self._args_taken = args_taken
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def short(self):
+        return self._short
+
+    @short.setter
+    def short(self, value):
+        if len(value) != 2:
+            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
+        if value:
+            self._short = value
+
+    @property
+    def long(self):
+        return self._long
+
+    @long.setter
+    def long(self, value):
+        if not value.startswith('--'):
+            raise RuntimeError('Arg.long improper format. Must be in "--help" style.')
+        self._long = value
+
+    @property
+    def help(self):
+        return self._help
+
+    @help.setter
+    def help(self, value):
+        self._help = value
+
+    @property
+    def required(self):
+        return self._required
+
+    @required.setter
+    def required(self, value):
+        self._required = value
+
+    @property
+    def has_action(self):
+        return self._has_action
+
+    @property
+    def action(self):
+        return self._action
+
+    @action.setter
+    def action(self, value):
+        if value != _null_func:
+            self._has_action = True
+        self._action = value
+
+    @property
+    def index(self):
+        return self._index
+
+    @index.setter
+    def index(self, value):
+        self._index = value
+
+    # @property
+    # def usage(self):
+    #     return self._usage
+    #
+    # @usage.setter
+    # def usage(self, value):
+    #     self._usage = value
+
+    @property
+    def args_taken(self):
+        return self._args_taken
+
+    @args_taken.setter
+    def args_taken(self, value):
+        self._args_taken = value

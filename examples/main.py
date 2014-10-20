@@ -3,7 +3,6 @@
 # Simply import the lib
 import clapp
 
-
 # is used as the action when -o <file> is passed to the app
 def do_output(context):
     print('-o was passed the file: ', context['out'])
@@ -25,8 +24,8 @@ def my_main(context):
 # your main() should accept a dict() with config
 # It will be executed AFTER all actions have returned
 arg1 = clapp.Arg('out_file')
-arg1.short = 'o'
-arg1.long ='output'
+arg1.short = '-o'
+arg1.long ='--output'
 arg1.args_taken = 1
 arg1.help = 'The output file'
 arg1.action = do_output
