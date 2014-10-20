@@ -1,6 +1,6 @@
 # Clapp-py
 
-An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches and arguments. `clapp` is designed as a learning platform, not to replace argparse.
+An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches and arguments.
 
 ## Use
 
@@ -42,7 +42,7 @@ Additional arguments can be added using the following (note keyword arguments ca
 arg1 = clapp.Arg('out_file')
 arg1.short = '-o'
 arg1.long = '--output'
-arg1.needs_arg = True
+arg1.args_taken = 1
 arg1.help = 'The output file used by MyApp'
 
 arg2 = clapp.Arg('in_file')
@@ -57,7 +57,7 @@ app.add_args([arg1, arg2])
 
 app.start()
 ```
-Adding positional arguments is just as easy (note when using positional arguments, you **MUST** set the `name` property)
+Adding positional arguments is just as easy (note positional arguments start at 1 **not** 0)
 ```python
 arg3 = clapp.Arg('config_file')
 arg3.index = 1
