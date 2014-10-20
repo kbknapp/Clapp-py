@@ -62,19 +62,24 @@ class App(object):
             if skip_next and num_to_skip > 0:
                 num_to_skip -= 1
                 continue
+            skip_next = False
+            num_to_skip = 0
+            if arg.find('=') != -1:
+                arg, next_arg = arg.split('=')
+                args.insert(i+1, next_arg)
+
             if arg not in self._args_map and possible_pos_args:
                 pos_args += 1
                 index = 'index{}'.format(pos_args)
                 self._context[self._args_map[index].name] = arg
+                arg = self._args_map[index].name
             elif not possible_pos_args:
                 print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
                 self._display_usage(exit=True)
-            if arg.find('=') != -1:
-                arg, next_arg = arg.split('=')
-                args.insert(i+1, next_arg)
+
             argo = self._args_map[arg]
             if argo.args_taken:
-                if i+1 == len(args):
+                if i+argo.args_taken == len(args):
                     print('Argument error from {}\n{} expected {} arguments but received 0.'
                               .format(arg, arg, argo.args_taken))
                     self._display_usage(exit=True)
@@ -89,12 +94,12 @@ class App(object):
                 self._context[argo.name] = taken_args
                 skip_next = True
                 num_to_skip = argo.args_taken
-            else:
+            elif arg in self._flags:
                 self._context[argo.name] = True
             if argo.has_action:
                 actions_todo.append(argo.action)
 
-        if pos_args >= len(self._req_pos_args):
+        if pos_args < len(self._req_pos_args):
             print('Argument error.\nRequired number of positional arguments not found.')
             self._display_usage(exit=True)
 

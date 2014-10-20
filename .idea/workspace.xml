@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/main.py" afterPath="$PROJECT_DIR$/examples/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Clapp-py.iws" />
@@ -30,18 +29,18 @@
       <file leaf-file-name="clapp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48472905" vertical-offset="768" max-vertical-offset="6510">
-              <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
+            <state vertical-scroll-proportion="0.85714287" vertical-offset="768" max-vertical-offset="6615">
+              <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
               <folding>
                 <element signature="e#109#119#0" expanded="true" />
                 <element signature="e#344#852#0" expanded="false" />
-                <element signature="e#4765#6368#0" expanded="false" />
-                <element signature="e#6424#6495#0" expanded="false" />
-                <element signature="e#6541#7187#0" expanded="false" />
-                <element signature="e#7219#7568#0" expanded="false" />
-                <element signature="e#7606#7631#0" expanded="false" />
-                <element signature="e#7671#7725#0" expanded="false" />
-                <element signature="e#7850#8530#0" expanded="false" />
+                <element signature="e#4906#6509#0" expanded="false" />
+                <element signature="e#6565#6636#0" expanded="false" />
+                <element signature="e#6682#7328#0" expanded="false" />
+                <element signature="e#7360#7709#0" expanded="false" />
+                <element signature="e#7747#7772#0" expanded="false" />
+                <element signature="e#7812#7866#0" expanded="false" />
+                <element signature="e#7991#8671#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -388,7 +387,11 @@
       <created>1413819318595</created>
       <updated>1413819318595</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Re-write of clapp">
+      <created>1413828924575</created>
+      <updated>1413828924575</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -449,13 +452,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#4765#6368#0" expanded="false" />
-            <element signature="e#6424#6495#0" expanded="false" />
-            <element signature="e#6541#7187#0" expanded="false" />
-            <element signature="e#7219#7568#0" expanded="false" />
-            <element signature="e#7606#7631#0" expanded="false" />
-            <element signature="e#7671#7725#0" expanded="false" />
-            <element signature="e#7850#8530#0" expanded="false" />
+            <element signature="e#4906#6509#0" expanded="false" />
+            <element signature="e#6565#6636#0" expanded="false" />
+            <element signature="e#6682#7328#0" expanded="false" />
+            <element signature="e#7360#7709#0" expanded="false" />
+            <element signature="e#7747#7772#0" expanded="false" />
+            <element signature="e#7812#7866#0" expanded="false" />
+            <element signature="e#7991#8671#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -467,13 +470,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#4765#6368#0" expanded="false" />
-            <element signature="e#6424#6495#0" expanded="false" />
-            <element signature="e#6541#7187#0" expanded="false" />
-            <element signature="e#7219#7568#0" expanded="false" />
-            <element signature="e#7606#7631#0" expanded="false" />
-            <element signature="e#7671#7725#0" expanded="false" />
-            <element signature="e#7850#8530#0" expanded="false" />
+            <element signature="e#4906#6509#0" expanded="false" />
+            <element signature="e#6565#6636#0" expanded="false" />
+            <element signature="e#6682#7328#0" expanded="false" />
+            <element signature="e#7360#7709#0" expanded="false" />
+            <element signature="e#7747#7772#0" expanded="false" />
+            <element signature="e#7812#7866#0" expanded="false" />
+            <element signature="e#7991#8671#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -485,13 +488,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#4765#6368#0" expanded="false" />
-            <element signature="e#6424#6495#0" expanded="false" />
-            <element signature="e#6541#7187#0" expanded="false" />
-            <element signature="e#7219#7568#0" expanded="false" />
-            <element signature="e#7606#7631#0" expanded="false" />
-            <element signature="e#7671#7725#0" expanded="false" />
-            <element signature="e#7850#8530#0" expanded="false" />
+            <element signature="e#4906#6509#0" expanded="false" />
+            <element signature="e#6565#6636#0" expanded="false" />
+            <element signature="e#6682#7328#0" expanded="false" />
+            <element signature="e#7360#7709#0" expanded="false" />
+            <element signature="e#7747#7772#0" expanded="false" />
+            <element signature="e#7812#7866#0" expanded="false" />
+            <element signature="e#7991#8671#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -503,13 +506,13 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#4765#6368#0" expanded="false" />
-            <element signature="e#6424#6495#0" expanded="false" />
-            <element signature="e#6541#7187#0" expanded="false" />
-            <element signature="e#7219#7568#0" expanded="false" />
-            <element signature="e#7606#7631#0" expanded="false" />
-            <element signature="e#7671#7725#0" expanded="false" />
-            <element signature="e#7850#8530#0" expanded="false" />
+            <element signature="e#4906#6509#0" expanded="false" />
+            <element signature="e#6565#6636#0" expanded="false" />
+            <element signature="e#6682#7328#0" expanded="false" />
+            <element signature="e#7360#7709#0" expanded="false" />
+            <element signature="e#7747#7772#0" expanded="false" />
+            <element signature="e#7812#7866#0" expanded="false" />
+            <element signature="e#7991#8671#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -531,18 +534,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48472905" vertical-offset="768" max-vertical-offset="6510">
-          <caret line="78" column="63" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
+        <state vertical-scroll-proportion="0.85714287" vertical-offset="768" max-vertical-offset="6615">
+          <caret line="96" column="35" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#4765#6368#0" expanded="false" />
-            <element signature="e#6424#6495#0" expanded="false" />
-            <element signature="e#6541#7187#0" expanded="false" />
-            <element signature="e#7219#7568#0" expanded="false" />
-            <element signature="e#7606#7631#0" expanded="false" />
-            <element signature="e#7671#7725#0" expanded="false" />
-            <element signature="e#7850#8530#0" expanded="false" />
+            <element signature="e#4906#6509#0" expanded="false" />
+            <element signature="e#6565#6636#0" expanded="false" />
+            <element signature="e#6682#7328#0" expanded="false" />
+            <element signature="e#7360#7709#0" expanded="false" />
+            <element signature="e#7747#7772#0" expanded="false" />
+            <element signature="e#7812#7866#0" expanded="false" />
+            <element signature="e#7991#8671#0" expanded="false" />
           </folding>
         </state>
       </provider>
