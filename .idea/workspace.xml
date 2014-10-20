@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e67d15-66cf-49b5-8a1c-a46dcd12d80e" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clapp/clapp.py" afterPath="$PROJECT_DIR$/clapp/clapp.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples/main.py" afterPath="$PROJECT_DIR$/examples/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -26,30 +27,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="clapp.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="clapp.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2205" max-vertical-offset="7245">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.49852216" vertical-offset="943" max-vertical-offset="6384">
+              <caret line="172" column="34" selection-start-line="172" selection-start-column="34" selection-end-line="172" selection-end-column="34" />
               <folding>
                 <element signature="e#109#119#0" expanded="true" />
                 <element signature="e#344#852#0" expanded="false" />
-                <element signature="e#5814#7417#0" expanded="false" />
-                <element signature="e#7473#7544#0" expanded="false" />
-                <element signature="e#8268#8617#0" expanded="false" />
-                <element signature="e#8655#8680#0" expanded="false" />
-                <element signature="e#8720#8774#0" expanded="false" />
-                <element signature="e#8899#9579#0" expanded="false" />
+                <element signature="e#1153#4856#0" expanded="false" />
+                <element signature="e#7647#7718#0" expanded="false" />
+                <element signature="e#8442#8791#0" expanded="false" />
+                <element signature="e#8829#8854#0" expanded="false" />
+                <element signature="e#8894#8948#0" expanded="false" />
+                <element signature="e#9073#9753#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7862069" vertical-offset="441" max-vertical-offset="1554">
-              <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="1554">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -79,8 +80,8 @@
       <list>
         <option value="$PROJECT_DIR$/clapp/arg.py" />
         <option value="$PROJECT_DIR$/clapp/app.py" />
-        <option value="$PROJECT_DIR$/clapp/clapp.py" />
         <option value="$PROJECT_DIR$/examples/main.py" />
+        <option value="$PROJECT_DIR$/clapp/clapp.py" />
       </list>
     </option>
   </component>
@@ -418,7 +419,11 @@
       <created>1413830918096</created>
       <updated>1413830918096</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Updated examples">
+      <created>1413831142688</created>
+      <updated>1413831142688</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -469,7 +474,8 @@
     <MESSAGE value="Fixed bug when processing flags" />
     <MESSAGE value="Removed commented out code" />
     <MESSAGE value="Added example link" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added example link" />
+    <MESSAGE value="Updated examples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated examples" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -484,12 +490,12 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5814#7417#0" expanded="false" />
-            <element signature="e#7473#7544#0" expanded="false" />
-            <element signature="e#8268#8617#0" expanded="false" />
-            <element signature="e#8655#8680#0" expanded="false" />
-            <element signature="e#8720#8774#0" expanded="false" />
-            <element signature="e#8899#9579#0" expanded="false" />
+            <element signature="e#1153#4856#0" expanded="false" />
+            <element signature="e#7647#7718#0" expanded="false" />
+            <element signature="e#8442#8791#0" expanded="false" />
+            <element signature="e#8829#8854#0" expanded="false" />
+            <element signature="e#8894#8948#0" expanded="false" />
+            <element signature="e#9073#9753#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -501,12 +507,12 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5814#7417#0" expanded="false" />
-            <element signature="e#7473#7544#0" expanded="false" />
-            <element signature="e#8268#8617#0" expanded="false" />
-            <element signature="e#8655#8680#0" expanded="false" />
-            <element signature="e#8720#8774#0" expanded="false" />
-            <element signature="e#8899#9579#0" expanded="false" />
+            <element signature="e#1153#4856#0" expanded="false" />
+            <element signature="e#7647#7718#0" expanded="false" />
+            <element signature="e#8442#8791#0" expanded="false" />
+            <element signature="e#8829#8854#0" expanded="false" />
+            <element signature="e#8894#8948#0" expanded="false" />
+            <element signature="e#9073#9753#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -518,12 +524,12 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5814#7417#0" expanded="false" />
-            <element signature="e#7473#7544#0" expanded="false" />
-            <element signature="e#8268#8617#0" expanded="false" />
-            <element signature="e#8655#8680#0" expanded="false" />
-            <element signature="e#8720#8774#0" expanded="false" />
-            <element signature="e#8899#9579#0" expanded="false" />
+            <element signature="e#1153#4856#0" expanded="false" />
+            <element signature="e#7647#7718#0" expanded="false" />
+            <element signature="e#8442#8791#0" expanded="false" />
+            <element signature="e#8829#8854#0" expanded="false" />
+            <element signature="e#8894#8948#0" expanded="false" />
+            <element signature="e#9073#9753#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -535,12 +541,12 @@
           <folding>
             <element signature="e#109#119#0" expanded="true" />
             <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5814#7417#0" expanded="false" />
-            <element signature="e#7473#7544#0" expanded="false" />
-            <element signature="e#8268#8617#0" expanded="false" />
-            <element signature="e#8655#8680#0" expanded="false" />
-            <element signature="e#8720#8774#0" expanded="false" />
-            <element signature="e#8899#9579#0" expanded="false" />
+            <element signature="e#1153#4856#0" expanded="false" />
+            <element signature="e#7647#7718#0" expanded="false" />
+            <element signature="e#8442#8791#0" expanded="false" />
+            <element signature="e#8829#8854#0" expanded="false" />
+            <element signature="e#8894#8948#0" expanded="false" />
+            <element signature="e#9073#9753#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -560,28 +566,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
+    <entry file="file://$PROJECT_DIR$/examples/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2205" max-vertical-offset="7245">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#109#119#0" expanded="true" />
-            <element signature="e#344#852#0" expanded="false" />
-            <element signature="e#5814#7417#0" expanded="false" />
-            <element signature="e#7473#7544#0" expanded="false" />
-            <element signature="e#8268#8617#0" expanded="false" />
-            <element signature="e#8655#8680#0" expanded="false" />
-            <element signature="e#8720#8774#0" expanded="false" />
-            <element signature="e#8899#9579#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="189" max-vertical-offset="1554">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/examples/main.py">
+    <entry file="file://$PROJECT_DIR$/clapp/clapp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7862069" vertical-offset="441" max-vertical-offset="1554">
-          <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
-          <folding />
+        <state vertical-scroll-proportion="0.49852216" vertical-offset="943" max-vertical-offset="6384">
+          <caret line="172" column="34" selection-start-line="172" selection-start-column="34" selection-end-line="172" selection-end-column="34" />
+          <folding>
+            <element signature="e#109#119#0" expanded="true" />
+            <element signature="e#344#852#0" expanded="false" />
+            <element signature="e#1153#4856#0" expanded="false" />
+            <element signature="e#7647#7718#0" expanded="false" />
+            <element signature="e#8442#8791#0" expanded="false" />
+            <element signature="e#8829#8854#0" expanded="false" />
+            <element signature="e#8894#8948#0" expanded="false" />
+            <element signature="e#9073#9753#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

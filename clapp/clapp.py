@@ -111,6 +111,10 @@ class App(object):
             if argo.has_action:
                 actions_todo.append(argo.action)
 
+        for act in actions_todo:
+            if act == self._display_version or act == self._display_help:
+                act()
+
         if pos_args < len(self._req_pos_args):
             print('Argument error.\nRequired number of positional arguments not found.')
             self._display_usage(exit=True)
@@ -160,13 +164,13 @@ class App(object):
         if self._flags:
             print('\nFLAGS:')
             for f in self._flags:
-                # a = self._args_map[f]
-                print(f.short, end='')
                 if f.short and f.long:
-                    print(',', end='')
+                    print('{},{}\t'.format(f.short, f.long), end='')
+                elif f.short:
+                    print('{}\t\t'.format(f.short), end='')
                 else:
-                    print('\t', end='')
-                print('{}\t\t{}'.format(f.long, f.help))
+                    print('{}\t'.format(f.long), end='')
+                print('{}'.format(f.help))
 
         if self._opts:
             print('\nOPTIONS:')

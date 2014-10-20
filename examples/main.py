@@ -14,7 +14,7 @@ def do_output(context):
 def my_main(context):
     """ The starting point for your app."""
     print('starting MyApp...')
-    if context['debug']:
+    if context['verbosity']:
         print('Context:')
         for k in context:
             print('Key: {}\nValue: {}'.format(k, context[k]))
@@ -46,9 +46,9 @@ if __name__ == '__main__':
     arg2.required = True
 
     # Creating a true/false flag is easy too
-    arg3 = clapp.Arg('debug')
-    arg3.short = '-d'
-    arg3.long = '--debug'
+    arg3 = clapp.Arg('verbosity')
+    arg3.short = '-v'
+    arg3.long = '--verbose'
     arg3.help = 'Print debugging info'
 
 
