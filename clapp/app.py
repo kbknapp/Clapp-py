@@ -45,106 +45,21 @@ class Clapp(object):
         self._raw_args = sys.argv
 
         if len(sys.argv) > 1:
-            self._context['raw_args'] = sys.argv[1:]
+            self._context['raw_args'] = sys.argv
             self._do_args(sys.argv[1:])
 
         if self._has_main:
             self._main(self._context)
 
     def _do_args(self, args):
-        if self._args_parsed:
-            return
+        actions_todo = []
+        pos_args = 0
 
-        # valid = False
-        ignore_next = False
-        todo = []
-        num_req_pos = self._num_req_pos_args
-        num_pos = self._num_pos_args + num_req_pos
-        cur_pos = 1
+        for arg in args:
+            if arg not in self._args_map:
+                pos_args += 1
+                self._context['index{}'.format(pos_args)] = arg
 
-        # for ak in self._args:
-        #    if self._args[ak].pos:
-        #        num_pos += 1
-        for i, a in enumerate(self._raw_args[1:]):
-            next_arg = ''
-            if ignore_next:
-                ignore_next = False
-                continue
-            if a[1] == '-':
-                # Arg start with --, so probably --times style
-                # Check if arg is something like --times=20
-                if a.find('=') != -1:
-                    s = a.split('=')
-                    # Set a to --times and next_arg to 20
-                    a = s[0]
-                    next_arg = s[1]
-                a = a.strip('-')
-                if a not in self._valid_arg_strings:
-                    print('Supplied argument isn\'t valid')
-                    self._display_usage()
-                valid_arg = self._valid_args_map[a]
-                if valid_arg.needs_arg:
-                    if not next_arg:
-                        next_arg = self._raw_args[i+1]
-                        ignore_next = True
-                    if next_arg[0] == '-':
-                        self._display_usage()
-                    self._context[valid_arg.id] = next_arg
-                else: 
-                    self._context[valid_arg.id] = True
-                if valid_arg.has_action:
-                    todo.append(valid_arg.action)
-            elif a[0] == '-':
-                # Not --times style
-                # could be -f<file> style though
-                if a[1] in self._valid_arg_strings:
-                    valid_arg = self._valid_args_map[a[1]]
-                    if self._valid_args_map[a[1]].needs_arg:
-                        if len(a) > 2:
-                            # It is...
-                            #a = a.strip('-')
-                            next_arg = a[2:]
-                        else:
-                            next_arg = self._raw_args[i+1]
-                            ignore_next = True
-                        if next_arg[0] == '-':
-                            self._display_usage()
-                        self._context[valid_arg.id] = next_arg
-                    self._context[valid_arg.id] = True
-                    if valid_arg.has_action:
-                        todo.append(valid_arg.action)
-                else:
-                    print('Supplied argument invalid')
-                    self._display_usage()
-            else:
-                # Maybe positional
-                if not num_pos:
-                    # There shouldn't be any positional
-                    print('Too many positional arguments supplied')
-                    self._display_usage()
-                valid_arg = self._valid_args_map['posarg{}'.format(cur_pos)]
-                self._context[valid_arg.id] = a
-                if valid_arg.has_action:
-                    todo.append(valid_arg.action)
-                num_pos -= 1
-                cur_pos += 1
-                num_req_pos -= 1
-
-        if num_req_pos > 0:
-            print('Required arguments not found...')
-            self._display_usage()
-
-        for id in self._req_opts:
-            if id not in self._context:
-                print('Required arguments not found...')
-                self._display_usage()
-
-        # DEBUG
-        # self._debug()
-
-        for f in todo:
-            f(self._context)
-        self._args_parsed = True
 
     def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
@@ -168,44 +83,44 @@ class Clapp(object):
 
     def _display_help(self, context=None):
         print('\n{} v{}\n{}'.format(self.name, self.version, self.about))
-        self._display_usage(no_exit=True)
+        self._display_usage(exit=False)
         if self._flags:
             print('\nFLAGS:')
             for f in self._flags:
                 a = self._args[f]
-                print(a.short_name, end='')
-                if a.short_name and a.long_name:
+                print(a.short, end='')
+                if a.short and a.long:
                     print(',', end='')
                 else:
                     print('\t', end='')
-                print('{}\t\t{}'.format(a.long_name, a.help))
+                print('{}\t\t{}'.format(a.long, a.help))
 
         if self._opts:
             print('\nOPTIONS:')
             for f in self._opts:
                 o = self._args[f[0:f.find(' ')]]
-                print(o.short_name, end='')
-                if o.short_name and o.long_name:
+                print(o.short, end='')
+                if o.short and o.long:
                     print(',', end='')
-                print('{}={}\t{}'.format(o.long_name, o.usage, o.help))
+                print('{}={}\t{}'.format(o.long, o.name, o.help))
         if self._req_opts:
             print('\nREQUIRED OPTIONS:')
             for f in self._req_opts:
                 ro = self._args[f[0:f.find(' ')]]
-                print(ro.short_name, end='')
-                if ro.short_name and ro.long_name:
+                print(ro.short, end='')
+                if ro.short and ro.long:
                     print(',', end='')
-                print('{}={}\t\t{}'.format(ro.long_name, ro.usage, ro.help))
+                print('{}={}\t\t{}'.format(ro.long, ro.name, ro.help))
         if self._req_pos_args:
-            print('\nREQUIRED ARGUMENTS:')
+            print('\nREQUIRED POSITIONAL ARGUMENTS:')
             for f in self._req_pos_args:
                 rpo = self._args[f]
-                print('{}\t\t{}'.format(rpo.usage, rpo.help))
+                print('{}\t\t{}'.format(rpo.name, rpo.help))
         if self._pos_args:
-            print('\nOPTIONAL ARGUMENTS:')
+            print('\nOPTIONAL POSITIONAL ARGUMENTS:')
             for f in self._pos_args:
                 po = self._args[f]
-                print('{}\t\t{}'.format(po.usage, po.help))
+                print('{}\t\t{}'.format(po.name, po.help))
         sys.exit(0)
 
     def _display_version(self, context=None):
