@@ -54,11 +54,22 @@ class Clapp(object):
     def _do_args(self, args):
         actions_todo = []
         pos_args = 0
+        skip_next = False
+        possible_pos_args = len(self._pos_args) + len(self._req_pos_args)
 
-        for arg in args:
-            if arg not in self._args_map:
+        for i, arg in enumerate(args):
+            if skip_next:
+                continue
+            if arg not in self._args_map and possible_pos_args:
                 pos_args += 1
-                self._context['index{}'.format(pos_args)] = arg
+                index = 'index{}'.format(pos_args)
+                self._context[self._args_map[index].name] = arg
+            else:
+                print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
+                self._display_usage(exit=True)
+            argo = self._args_map[arg]
+            self._context[argo.name] = True
+
 
 
     def _display_usage(self, exit=True):
