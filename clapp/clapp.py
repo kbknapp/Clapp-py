@@ -4,23 +4,34 @@ Python 3.x
 
 clapp.py
 
-v0.3.1
+v0.3.7
 
 A library for building command line applications
 '''
 import sys
 from os import path
 
-__version__ = '0.3.6'
+__version__ = '0.3.7'
+__build__ = '1'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
 def _null_func(context):
+    """Represents a None for a function"""
     pass
 
 
 class App(object):
+    """The starting point for a command line application"""
     def __init__(self, name='', version='', about='', main=_null_func):
+        """Initializes a new version of the App class
+        PARAMS:
+            name: A string representing the name of the application
+            version: A string representing the version of the application
+            about: A string that displays what the application briefly doesn
+            main: A function which accepts a dict() and the starting point of the app
+                  will be called after all command line argumetns have been processed
+        """
         self._name = name
         self._version = version
         self._args_map = dict()
@@ -32,8 +43,6 @@ class App(object):
             self._has_main = True
         self._main = main
         self._context = dict()
-        
-        # self._args_parsed = False
         self._req_opts = []
         self._flags = []
         self._req_pos_args = []
@@ -41,7 +50,14 @@ class App(object):
         self._opts = []
 
     def start(self):
+        """Called when the user wants to start processing command line arguments
+        and start his main(context) function
+        RETURN: Returns whatever your main(context) returns in order to allow
+                sys.exit(app.start())
+        """
+        # Add a help command line argument if needed (i.e. -h and --help)
         self._add_help()
+        # Add a version command line argument if needed (i.e. -v and --version)
         self._add_version()
 
         if len(sys.argv) > 1:
@@ -49,9 +65,15 @@ class App(object):
             self._do_args(sys.argv[1:])
 
         if self._has_main:
-            self._main(self._context)
+            return self._main(self._context)
 
     def _do_args(self, args):
+        """Validates the command line arguments passed to the script and performs
+        any actions they call for.
+        PARAMS:
+            args: A list of command line arguments (pulled from sys.argv[1:])
+        """
+
         actions_todo = []
         pos_args = 0
         skip_next = False
@@ -148,6 +170,8 @@ class App(object):
     def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
         name.py [flags] <req_opts> [opt_opts] <req_positional_args> [opt_positional_args]
+        PARAMS:
+            exit: Should sys.exit() be called at the conclusion of the function
         '''
         usage_str = ''
         if self._flags:
@@ -165,7 +189,8 @@ class App(object):
             print('\nFor more information try --help')
             sys.exit(0)
 
-    def _display_help(self, context=None):
+    def _display_help(self):
+        """Displays the possible command line arguemnts to the user and exits"""
         print('\n{} v{}\n{}'.format(self.name, self.version, self.about))
         self._display_usage(exit=False)
         if self._flags:
@@ -212,7 +237,7 @@ class App(object):
         sys.exit(0)
 
     def _add_arg_to_map(self, arg):
-        """Builds a dict of possible valid arguments."""
+        """Builds a dict() of valid command line arguments based on Arg()s passed by the user."""
         self._args_map[arg.name] = arg
         if arg.short:
             self._args_map[arg.short] = arg
@@ -233,6 +258,7 @@ class App(object):
                 self._flags.append(arg)
 
     def _debug(self):
+        """Displays debugging info"""
         print('Args dict:\n{}'.format(self._args))
         print('Args List:\n{}'.format(self.args))
         print('Flags:\n{}'.format(self._flags))
@@ -242,13 +268,39 @@ class App(object):
         print('Req Pos:\n{}'.format(self._req_pos_args))
 
     def add_arg(self, arg):
+        """Add a single Arg() to the application
+        PARAMS:
+            arg: the clapp.Arg() to be added to the application
+        """
         self._add_arg_to_map(arg)
 
     def add_args(self, args):
+        """Add multiple clapp.Arg()s to the application
+        PARAMS:
+            args: A collection (list, set, etc.) of clapp.Arg() objects
+        """
         for arg in args:
             self._add_arg_to_map(arg)
 
-    def new_arg(self, name, long='', short='', help='', action=_null_func, index=0, args_taken=0, required=False):
+    def new_arg(self, 
+                name, 
+                long='', 
+                short='', 
+                help='', 
+                action=_null_func, 
+                index=0, 
+                args_taken=0, 
+                required=False):
+        """Create and add a clapp.Arg() to the application on the fly
+        PARAMS:
+            name: The unique name of the argument as a string
+            long: A string of the long version of the argument (if any) i.e. --help
+            short: A string of the short version of the argument (if any) i.e. -h
+            help: A help string about the argument displayed to the user when they use the --help
+            action: A handler to be called if the user calls this argument (must accept a dict())
+            index: Used for positional arguments (Note: 1 based, **NOT** 0 based)
+            args_taken: Int representing how many expected additional arguments i.e. -o <file>
+            required: Is this argument mandatory for proper script functionality?"""
         arg = Arg(name,
                   long=long,
                   short=short,
@@ -261,6 +313,9 @@ class App(object):
         self._add_arg_to_map(arg)
 
     def _add_help(self):
+        """Determines if the user provided his own --help or -h arguments
+        and adds a default implementation if it doesn't find any
+        """
         help = Arg('help')
         help.action = self._display_help
         help.help = 'Display help information'
@@ -277,6 +332,9 @@ class App(object):
         self.add_arg(help)
 
     def _add_version(self):
+        """Determines if the user provided his own --version or -v arguments
+        and adds a default implementation if it doesn't find any
+        """
         version = Arg('version')
         version.action = self._display_version
         version.help = 'Display version information'
