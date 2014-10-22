@@ -4,15 +4,15 @@ Python 3.x
 
 clapp.py
 
-v0.3.7
+v0.4
 
 A library for building command line applications
 '''
 import sys
 from os import path
 
-__version__ = '0.3.7'
-__build__ = '1'
+__version__ = '0.4'
+__build__ = '12'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -43,6 +43,8 @@ class App(object):
             self._has_main = True
         self._main = main
         self._context = dict()
+        self._subcmds_map = dict()
+        self._subcmds = []
         self._req_opts = []
         self._flags = []
         self._req_pos_args = []
@@ -60,9 +62,8 @@ class App(object):
         # Add a version command line argument if needed (i.e. -v and --version)
         self._add_version()
 
-        if len(sys.argv) > 1:
-            self._context['raw_args'] = sys.argv
-            self._do_args(sys.argv[1:])
+        self._context['raw_args'] = sys.argv
+        self._do_args(sys.argv[1:])
 
         if self._has_main:
             return self._main(self._context)
@@ -79,6 +80,7 @@ class App(object):
         skip_next = False
         num_to_skip = 0
         possible_pos_args = len(self._pos_args) + len(self._req_pos_args)
+        subcmd = None
 
         for i, arg in enumerate(args):
             if skip_next and num_to_skip > 0:
@@ -98,6 +100,10 @@ class App(object):
                 continue
 
             if arg not in self._args_map:
+                if arg in self._subcmds_map:
+                    subcmd = self._subcmds_map[arg]
+                    args = args[i+1:]
+                    break
                 if possible_pos_args and arg[0] != '-':
                     pos_args += 1
                     index = 'index{}'.format(pos_args)
@@ -167,6 +173,9 @@ class App(object):
         for act in actions_todo:
             act(self._context)
 
+        if subcmd:
+            subcmd.start(args)
+
     def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
         name.py [flags] <req_opts> [opt_opts] <req_positional_args> [opt_positional_args]
@@ -184,6 +193,8 @@ class App(object):
             usage_str += ' <{}>'.format(' '.join([arg.name for arg in self._req_pos_args]))
         if self._pos_args:
             usage_str += ' [{}]'.format(' '.join([arg.name for arg in self._pos_args]))
+        if self._subcmds:
+            usage_str += ' [SUBCOMMANDS]'
         print('\nUSAGE:\n{} {}'.format(path.basename(self._raw_args[0]), usage_str))
         if exit:
             print('\nFor more information try --help')
@@ -193,6 +204,11 @@ class App(object):
         """Displays the possible command line arguemnts to the user and exits"""
         print('\n{} v{}\n{}'.format(self.name, self.version, self.about))
         self._display_usage(exit=False)
+        if self._subcmds:
+            print('\nSUB COMMANDS:')
+            for sc in self._subcmds:
+                print('{}\t\t{}'.format(sc.name, sc.about))
+
         if self._flags:
             print('\nFLAGS:')
             for f in self._flags:
@@ -257,6 +273,11 @@ class App(object):
             else:
                 self._flags.append(arg)
 
+    def _add_subcmd_to_map(self, subcmd):
+        """Builds a dict() of valid command line arguments based on Arg()s passed by the user."""
+        self._subcmds_map[subcmd.name] = subcmd
+        self._subcmds.append(subcmd)
+
     def _debug(self):
         """Displays debugging info"""
         print('Args dict:\n{}'.format(self._args))
@@ -282,14 +303,14 @@ class App(object):
         for arg in args:
             self._add_arg_to_map(arg)
 
-    def new_arg(self, 
-                name, 
-                long='', 
-                short='', 
-                help='', 
-                action=_null_func, 
-                index=0, 
-                args_taken=0, 
+    def new_arg(self,
+                name,
+                long='',
+                short='',
+                help='',
+                action=_null_func,
+                index=0,
+                args_taken=0,
                 required=False):
         """Create and add a clapp.Arg() to the application on the fly
         PARAMS:
@@ -311,6 +332,63 @@ class App(object):
                   required=required)
 
         self._add_arg_to_map(arg)
+
+    def new_subcommand_with_arg(self,
+                name,
+                arg,
+                about='',
+                version='',
+                main=_null_func,
+                ):
+        """Create and add a clapp.Arg() to the application on the fly
+        PARAMS:
+            name: The unique name of the sub-command as a string
+            arg: The clapp.Arg() to add to the sub-command
+        """
+        subcmd = SubCommand(name, version=version, about=about, main=main)
+        subcmd.add_arg(arg)
+        self.add_subcommand(subcmd)
+
+    def new_subcommand_with_args(self,
+                                 name,
+                                 args,
+                                 about='',
+                                 version='',
+                                 main=_null_func):
+        """Create and add a clapp.Arg() to the application on the fly
+        PARAMS:
+            name: The unique name of the sub-command as a string
+            arg: The clapp.Arg() to add to the sub-command
+        """
+        subcmd = SubCommand(name, version=version, about=about, main=main)
+        subcmd.add_args(args)
+        self.add_subcommand(subcmd)
+
+    def new_subcommand(self,
+                       name,
+                       about='',
+                       version='',
+                       main=_null_func):
+        """Create and add a clapp.Arg() to the application on the fly
+        PARAMS:
+            name: The unique name of the sub-command as a string
+            arg_name: A unique name of the sub-command argument as a string
+            long: A string of the long version of the argument (if any) i.e. --help
+            short: A string of the short version of the argument (if any) i.e. -h
+            help: A help string about the argument displayed to the user when they use the --help
+            action: A handler to be called if the user calls this argument (must accept a dict())
+            index: Used for positional arguments (Note: 1 based, **NOT** 0 based)
+            args_taken: Int representing how many expected additional arguments i.e. -o <file>
+            required: Is this argument mandatory for proper script functionality?"""
+        subcmd = SubCommand(name, version=version, about=about, main=main)
+        self.add_subcommand(subcmd)
+
+    def add_subcommand(self, subcmd):
+        self._add_subcmd_to_map(subcmd)
+
+    def add_subcommands(self, subcmds):
+        for sc in subcmds:
+            self.add_subcommand(sc)
 
     def _add_help(self):
         """Determines if the user provided his own --help or -h arguments
@@ -390,6 +468,30 @@ class App(object):
             self._has_main = True
         self._main = value
 
+class SubCommand(App):
+    def __init__(self, name, version='', about='', main=_null_func):
+        if not name or name.find(' ') != -1:
+            raise RuntimeError('SubCommand must have a unique name with no spaces.')
+        App.__init__(self, name=name, version=version, about=about, main=main)
+
+    def start(self, args):
+        """Called when the user wants to start processing command line arguments
+        and start his main(context) function
+        PARAMS:
+            args: a list of arguments supplied to the script
+        RETURN: Returns whatever your main(context) returns in order to allow
+                sys.exit(app.start())
+        """
+        # Add a help command line argument if needed (i.e. -h and --help)
+        self._add_help()
+        # Add a version command line argument if needed (i.e. -v and --version)
+        self._add_version()
+
+        self._context['raw_args'] = args
+        self._do_args(args)
+
+        if self._has_main:
+            return self._main(self._context)
 
 class Arg(object):
     def __init__(self,

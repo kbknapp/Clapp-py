@@ -21,7 +21,25 @@ def my_main(context):
         print('Done!')
     return 0
 
+def super_crazy(context):
+    print('super crazy actions happen here!')
+
+def super_main(context):
+    print('My super sub command was called!')
+
 if __name__ == '__main__':
+    # Create an var of type clapp.App and set the properties
+    # Could also use App(name='MyApp', version='1.0', about='Example CLI application')
+    # etc. etc.
+    #
+    # Your main() should accept a dict() with which is the context
+    # It will be executed AFTER all actions have returned
+    app = clapp.App('My Super App')
+    app.version = '1.0'
+    app.about = 'Testing a command line app'
+    app.main = my_main
+
+
     # Create a command line argument (can also use keyword arguments)
     # All actions should take one dict() as it will be passed a dict()
     # with context and will be executed PRIOR to your main()
@@ -42,7 +60,7 @@ if __name__ == '__main__':
     arg2 = clapp.Arg('in_file')
     arg2.index = 1
     arg2.help = 'The input file'
-    arg2.required = True
+    # arg2.required = True
 
     # Creating a true/false flag is easy too
     arg3 = clapp.Arg('debug')
@@ -54,17 +72,20 @@ if __name__ == '__main__':
     arg4.short = '-f'
     arg4.long = '--flag'
     arg4.help = 'Use some special flag'
-    # Create an var of type clapp.App and set the properties
-    # Could also use App(name='MyApp', version='1.0', about='Example CLI application')
-    # etc. etc.
-    #
-    # Your main() should accept a dict() with which is the context
-    # It will be executed AFTER all actions have returned
-    app = clapp.App()
-    app.name = 'MyApp'
-    app.version = '1.0'
-    app.about = 'Testing a command line app'
-    app.main = my_main
+
+    subcmd = clapp.SubCommand('super')
+    subcmd.version = '0.2'
+    subcmd.about = 'Does super things'
+    subcmd.main = super_main
+
+    subarg = clapp.Arg('crazy')
+    subarg.short = '-c'
+    subarg.help = 'Does something super crazy'
+    subarg.action = super_crazy
+
+    subcmd.add_arg(subarg)
+
     app.add_args([arg1, arg2, arg3, arg4])
+    app.add_subcommand(subcmd)
 
     app.start()
