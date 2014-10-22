@@ -135,6 +135,28 @@ app.add_subcommand(subcmd)
 app.start()
 ```
 
+We could then use our sub command as follows
+```bash
+$ ./main.py fake -c
+```
+
+Note: each sub-command gets it's own `--version` and `--help` for free. I.e.
+```bash
+$ ./main.py fake --help
+
+fake v0.2
+Does really fake things
+
+USAGE:
+main.py [-chv]
+
+FLAGS:
+-c		    Turns on the crazy
+-h,--help	Display help information
+-v,--version	Display version information
+```
+
+
 ### TODO
 #### Describe Arg
 #### Describe context
