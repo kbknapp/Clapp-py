@@ -148,7 +148,7 @@ fake v0.2
 Does really fake things
 
 USAGE:
-main.py [-chv]
+main.py fake [-chv]
 
 FLAGS:
 -c		    Turns on the crazy
