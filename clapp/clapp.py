@@ -4,15 +4,15 @@ Python 3.x
 
 clapp.py
 
-v0.4
+v0.4.1
 
 A library for building command line applications
 '''
 import sys
 from os import path
 
-__version__ = '0.4'
-__build__ = '12'
+__version__ = '0.4.1'
+__build__ = '4'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -102,7 +102,8 @@ class App(object):
             if arg not in self._args_map:
                 if arg in self._subcmds_map:
                     subcmd = self._subcmds_map[arg]
-                    args = args[i+1:]
+                    args = args[i:]
+                    args[0] = '{} {}'.format(self._raw_args[0], args[0])
                     break
                 if possible_pos_args and arg[0] != '-':
                     pos_args += 1
@@ -487,8 +488,9 @@ class SubCommand(App):
         # Add a version command line argument if needed (i.e. -v and --version)
         self._add_version()
 
+        self._raw_args = args
         self._context['raw_args'] = args
-        self._do_args(args)
+        self._do_args(args[1:])
 
         if self._has_main:
             return self._main(self._context)
