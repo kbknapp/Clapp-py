@@ -1,6 +1,6 @@
 # Clapp-py
 
-An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches and arguments.
+An argparse like library for creating command line applications. `clapp` makes it easy to add command line switches, arguments, and sub-commands.
 
 ## Use
 
@@ -108,6 +108,31 @@ REQUIRED OPTIONS:
 
 OPTIONAL ARGUMENTS:
 config_file		The config file used by MyApp
+```
+
+Sometimes you may wish to add a sub-command (akin to `git clone` style commands) which have their own switches and options independant of the main application. This is just as simple as adding arguments to an application. For example, if we wanted to add a single sub command to our `MyApp` called `fake` we could use the following:
+```python
+# The name of the subcommand must be unique and contain no spaces
+subcmd = clapp.SubCommand('fake')
+subcmd.version = '0.2'
+subcmd.about = 'Does really fake things'
+
+# If desired, we could even create a seperate main function
+subcmd.main = fake_main
+
+# We can then add additional arguemnts to fake if we wish
+fake_arg1 = clapp.Arg('crazy')
+fake_arg1.short = '-c'
+fake_arg1.help = 'Turns on the crazy'
+
+# You can add arguments to sub commands just like applications
+subcmd.add_arg(fake_arg1)
+
+# Once you have all the desired sub-commands you can add them to app
+app.add_subcommand(subcmd)
+
+# And start the app like normal
+app.start()
 ```
 
 ### TODO
