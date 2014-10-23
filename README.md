@@ -43,7 +43,7 @@ FLAGS:
 ### Adding Additional Arguments
 Most command line applications will want to add their own command line arguments in addition to the "for free" options that `clapp` provides. Adding those arguments is is as simple as creating a few objects and giving them to your application.
 
-Let's say you want to allow users to pass an optional output file using either a `-o` or `--output` switch and the file name (Note: You do not need to use both a long and shorthand version of a switch). And you also want to  accept a mandatory positional argument, which is some input file your program needs to function. 
+Let's say you want to allow users to pass an optional output file using either a `-o` or `--output` switch and the file name (**Note**: You do not need to use both a long and shorthand version of a switch). And you also want to  accept a mandatory positional argument, which is some input file your program needs to function. 
 
 In order to get the information back out of the those switches and arguemnts, start will return a dictionary filled with the parsed data.
 ```python
@@ -86,7 +86,7 @@ The `dict` we're calling `context` here would look like this right after the `st
 }
 ```
 
-Note: the multiple keys that each argument value is stored under. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any).
+**Note**: the multiple keys that each argument value is stored under. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any).
 
 ### Custom Handlers
 So far we've only seen how to check what users input. But what if we want to perform a specific action when a user passes a particular option? For this, we could define a custom handler or `action`. Let's say we want to parse a config file when the user passes a `-c` option and a config file. 
@@ -156,7 +156,7 @@ if __name__ == '__main__':
     app.start()
 ```
 
-Note: When using custom handlers and a main, all custom handlers are called and executed **BEFORE** your `main()` is called.
+**Note**: When using custom handlers and a main, all custom handlers are called and executed **BEFORE** your `main()` is called.
 
 ### Sub-Commands
 Sometimes you may wish to add a sub-command (akin to `git clone` style commands) which have their own switches and options independant of the main application. This is just as simple as adding arguments to an application. For example, if we wanted to add a single sub command to our `MyApp` called `fake` we could use the following:
@@ -189,7 +189,7 @@ We could then use our sub command as follows
 $ ./myapp.py fake -z
 ```
 
-Note: each sub-command gets it's own `--version` and `--help` for free. I.e.
+**Note**: each sub-command gets it's own `--version` and `--help` for free. I.e.
 ```bash
 $ ./myapp.py fake --help
 
@@ -214,8 +214,8 @@ myarg = clapp.Arg('name')
 #### `short` and `long` (i.e. `-h` and `--help` style)
 `short` and `long` define switches to denote the argument. You don't have to use both, you can use either one, or both.
 
-Note: when defining a `short`, it must start with a leading `-` and contain only one letter
-Note 2: when defining a `long`, it must start with a leading `--` and contain no spaces
+**Note**: when defining a `short`, it must start with a leading `-` and contain only one letter
+**Note 2**: when defining a `long`, it must start with a leading `--` and contain no spaces
 ```python
 myarg.short = '-d'
 myarg.long = '--debug'
@@ -236,9 +236,9 @@ myarg.help = 'Describe your argument or option here'
 #### Positional Arguments (`index`)
 If defining a positional argument (i.e. no -f or --fake) you must not define a `short` or `long`
 
-*Note*: the index starts at 1 **NOT** 0
+**Note**: the index starts at 1 **NOT** 0
 
-*Note 2*: The index specifies the relationship to other **POSITIONAL** arguments not arguments in general
+**Note 2**: The index specifies the relationship to other **POSITIONAL** arguments not arguments in general
 
 ```python
 myarg.index = 1
@@ -247,7 +247,7 @@ myarg.index = 1
 #### Making Arguments Mandatory (`required`)
 Defines if an argument is mandatory for your application to function if you specify that an argument is mandatory, and the parser determines that it was not found, your application will display the usage message and exit (**WITHOUT** calling your main() if it is defined)
 
-*Note*: If you define a `short` or `long` and set this property to true you **MUST** also set the `args_taken` property to something greater than 0 (i.e. there is no such thing as mandatory flag
+**Note**: If you define a `short` or `long` and set this property to true you **MUST** also set the `args_taken` property to something greater than 0 (i.e. there is no such thing as mandatory flag
 
 ```python
 myarg.required = False
