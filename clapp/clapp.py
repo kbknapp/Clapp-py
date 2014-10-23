@@ -4,7 +4,7 @@ Python 3.x
 
 clapp.py
 
-v0.4.1
+v0.4.2
 
 A library for building command line applications
 '''
@@ -13,8 +13,8 @@ from __future__ import print_function
 import sys
 from os import path
 
-__version__ = '0.4.1'
-__build__ = '5'
+__version__ = '0.4.2'
+__build__ = '2'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
