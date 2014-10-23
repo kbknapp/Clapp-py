@@ -13,7 +13,7 @@ $ touch __init__.py
 ```
 
 ## Use
-`clapp` gives you several things "for free" so to speak. Things such as typical unix-like help and version switches (`-h` / `--help` and`-v` / `--version` respecitivly). To get these features all you need to do is:
+`clapp` gives you several things "for free" so to speak. You can use as many, or as few of the features as you need. The things you get for free (i.e. with only three lines of code) are typical unix-like help and version switches (`-h` / `--help` and`-v` / `--version` respecitivly). To get these features all you need to do is:
 
 ```python
 import clapp
@@ -27,7 +27,13 @@ app.start()
 
 # Your code goes here
 ```
-From this point on, you can use the typical unix-like switches. This helps users instantly identify version numbers and help information without ever having to look at a single line of code or documentation.
+For the astute, that is more than three lines of code, the above could actually be shortened to
+```python
+import clapp
+app = clapp.App(name='MyApp', version='1.0', about='My sweet command line application')
+app.start()
+```
+Your command line application now has the typical unix-like switches which are nearly standard across all types of comand line applications. This helps users instantly identify version numbers and help information without ever having to look at a single line of code or documentation.
 
 ```bash
 $ ./myapp.py -v
