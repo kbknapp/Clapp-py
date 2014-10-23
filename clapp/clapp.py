@@ -8,6 +8,8 @@ v0.4.1
 
 A library for building command line applications
 '''
+
+from __future__ import print_function
 import sys
 from os import path
 
