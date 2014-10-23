@@ -88,6 +88,17 @@ The `dict` we're calling `context` here would look like this right after the `st
 
 **Note**: the multiple keys that each argument value is stored under. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any).
 
+#### Other Methods for Argument Creation
+You can also define arguments using key-word arguments instead of properties. Or by using the `App.new_arg()` method.
+```python
+myarg = clapp.Arg('out_file', short='-o', long='--output', args_taken=1, help='The output file to use')
+
+app.add_arg(myarg)
+
+app.new_arg('in_file', index=1, args_taken=1, required=True, help='The input file to use')
+```
+**Note**: The `name` is a positional argument and mandatory (i.e. there is no key-word for it, and it is not optional)
+
 ### Custom Handlers
 So far we've only seen how to check what users input. But what if we want to perform a specific action when a user passes a particular option? For this, we could define a custom handler or `action`. Let's say we want to parse a config file when the user passes a `-c` option and a config file. 
 
@@ -269,6 +280,5 @@ If you set the `args_taken` greater than 0 (meaning it's expecting additional ar
     '-l' : 'argument'
 }
 ```
-
 ### TODO
 #### Describe context
