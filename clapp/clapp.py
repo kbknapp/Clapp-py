@@ -13,8 +13,8 @@ from __future__ import print_function
 import sys
 from os import path
 
-__version__ = '0.4.2'
-__build__ = '2'
+__version__ = '0.4.3'
+__build__ = '1'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -68,6 +68,7 @@ class App(object):
 
         if self._has_main:
             return self._main(self._context)
+        return self._context
 
     def _do_args(self, args):
         """Validates the command line arguments passed to the script and performs
