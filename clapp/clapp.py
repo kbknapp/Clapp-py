@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-Python 3.x
+Python 2.x / 3.x
 
 clapp.py
 
