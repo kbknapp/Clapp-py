@@ -20,6 +20,7 @@ import clapp
 
 app = clapp.App()
 app.name = 'MyApp'
+app.author = 'Kevin K. <kbknapp@gmail.com>'
 app.version = '1.0'
 app.about = 'A custom command line app'
 
@@ -30,7 +31,7 @@ app.start()
 For the astute; that is indeed more than three lines of code. Fortunately, the above could actually be shortened to
 ```python
 import clapp
-app = clapp.App(name='MyApp', version='1.0', about='My sweet command line application')
+app = clapp.App(name='MyApp', version='1.0', author='Kevin K. <kbknapp@gmail.com>', about='My sweet command line application')
 app.start()
 ```
 Your command line application now has the typical unix-like switches which are nearly standard across all unix-like programs. This helps users instantly identify version numbers and help information without ever having to look at a single line of code or documentation.
@@ -46,6 +47,7 @@ Or
 $ ./myapp.py --help
 
 MyApp v1.0
+Kevin K. <kbknapp@gmail.com>
 A custom command line app
 
 USAGE:
@@ -145,6 +147,7 @@ At this point with four (3) arguments, using `-h` or `--help` would result in
 $ ./myapp.py -h
 
 MyApp v1.0
+Kevin K. <kbknapp@gmail.com>
 A custom command line app
 
 USAGE:
