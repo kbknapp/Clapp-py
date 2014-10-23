@@ -33,7 +33,7 @@ import clapp
 app = clapp.App(name='MyApp', version='1.0', about='My sweet command line application')
 app.start()
 ```
-Your command line application now has the typical unix-like switches which are nearly standard across all types of comand line applications. This helps users instantly identify version numbers and help information without ever having to look at a single line of code or documentation.
+Your command line application now has the typical unix-like switches which are nearly standard across all unix-like programs. This helps users instantly identify version numbers and help information without ever having to look at a single line of code or documentation.
 
 ```bash
 $ ./myapp.py -v
