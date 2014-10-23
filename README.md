@@ -1,6 +1,6 @@
 # Clapp-py
 
-`clapp` (which stands for **C**ommand **L**ine **APP**lication) is a very simple and minimal library for building command line applications and parsing command line arguments. `clapp` makes it easy to add command line switches, arguments, and sub-commands.
+`clapp` (which stands for Command Line APPlication) is a very simple and minimal library for building command line applications and parsing command line arguments. `clapp` makes it easy to add command line switches, arguments, and sub-commands.
 
 ## Use
 `clapp` gives you several things "for free" so to speak. Things such as typical unix-like help and version switches (`-h` / `--help` and`-v` / `--version` respecitivly). To get these features all you need to do is:
