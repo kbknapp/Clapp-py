@@ -25,7 +25,7 @@ def _null_func(context):
 
 class App(object):
     """The starting point for a command line application"""
-    def __init__(self, name='', version='', about='', main=_null_func):
+    def __init__(self, name='', version='', about='', author='', main=_null_func):
         """Initializes a new version of the App class
         PARAMS:
             name: A string representing the name of the application
@@ -35,6 +35,7 @@ class App(object):
                   will be called after all command line argumetns have been processed
         """
         self._name = name
+        self._author = author
         self._version = version
         self._args_map = dict()
         self._raw_args = sys.argv
@@ -205,7 +206,7 @@ class App(object):
 
     def _display_help(self):
         """Displays the possible command line arguemnts to the user and exits"""
-        print('\n{} v{}\n{}'.format(self.name, self.version, self.about))
+        print('\n{} v{}\n{}\n{}'.format(self.name, self.version, self.author, self.about))
         self._display_usage(exit=False)
         if self._subcmds:
             print('\nSUB COMMANDS:')
@@ -440,6 +441,13 @@ class App(object):
     @name.setter
     def name(self, value):
         self._name = value
+
+    @property
+    def author(self):
+        return self._author
+    @author.setter
+    def author(self, value):
+        self._author = value
 
     @property
     def version(self):
