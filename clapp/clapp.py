@@ -12,7 +12,7 @@ import sys
 from os import path
 
 __version__ = '0.4.1'
-__build__ = '4'
+__build__ = '5'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -35,7 +35,6 @@ class App(object):
         self._name = name
         self._version = version
         self._args_map = dict()
-        self._valid_args = []
         self._raw_args = sys.argv
         self._about = about
         self._has_main = False
