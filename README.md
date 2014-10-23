@@ -74,19 +74,19 @@ app.add_args([infile_arg, outfile_arg])
 context = app.start()
 
 # Your code goes here
-#
-# if we ran: myapp.py -o outfile.txt infile.txt
-# context looks like:
-# { '-o': 'outfile.txt',
-#   '--output': 'outfile.txt',
-#   'out_file': 'outfile.txt',
-#   'in_file': 'infile.txt',
-#   'index1': 'infile.txt',
-#   'raw_args': ['myapp.py', '-o', 'outfile.txt', 'infile.txt']
-# }
-# Note: the multiple keys each arg is stored under to give you options on
-#       how you wish to call for them
 ```
+The `dict` we're calling `context` here would look like this right after the `start()` call
+```python
+{ '-o': 'outfile.txt',
+   '--output': 'outfile.txt',
+   'out_file': 'outfile.txt',
+   'in_file': 'infile.txt',
+   'index1': 'infile.txt',
+   'raw_args': ['myapp.py', '-o', 'outfile.txt', 'infile.txt']
+}
+```
+
+Note: the multiple keys that each argument value is stored under. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any).
 
 ### Custom Handlers
 So far we've only seen how to check what users input. But what if we want to perform a specific action when a user passes a particular option? For this, we could define a custom handler or `action`. Let's say we want to parse a config file when the user passes a `-c` option and a config file. 
@@ -259,6 +259,15 @@ If your arguments needs additional positional arguments you can define how many 
 
 ```python
 myarg.args_taken = 2
+```
+If you set the `args_taken` greater than 0 (meaning it's expecting additional arguments), and **ALSO** define a `long` user can provide that additional argument in either `--long=argument` or `--long argument` styles. The end result is the same. I.e. the context `dict` will be populated as follows
+```python
+# Assuming you created and arguemnt with a short -l, name 'longa', and long '--long'
+{
+    '--long' : ['argument'],
+    'longa' : 'argument'
+    '-l' : 'argument'
+}
 ```
 
 ### TODO
