@@ -27,7 +27,7 @@ app.start()
 
 # Your code goes here
 ```
-For the astute, that is more than three lines of code, the above could actually be shortened to
+For the astute; that is indeed more than three lines of code. Fortunately, the above could actually be shortened to
 ```python
 import clapp
 app = clapp.App(name='MyApp', version='1.0', about='My sweet command line application')
