@@ -43,7 +43,7 @@ FLAGS:
 ### Adding Additional Arguments
 Most command line applications will want to add their own command line arguments in addition to the "for free" options that `clapp` provides. Adding those arguments is is as simple as creating a few objects and giving them to your application.
 
-Let's say you want to allow users to pass an optional output file to use using either a `-o` or `--output` switch and the file name (Note: You do not need to use both a long and shorthand version of a switch). And you also want to  accept a mandatory positional argument, which is some input file your program needs to function. 
+Let's say you want to allow users to pass an optional output file using either a `-o` or `--output` switch and the file name (Note: You do not need to use both a long and shorthand version of a switch). And you also want to  accept a mandatory positional argument, which is some input file your program needs to function. 
 
 In order to get the information back out of the those switches and arguemnts, start will return a dictionary filled with the parsed data.
 ```python
@@ -206,52 +206,58 @@ FLAGS:
 ```
 ### `clapp.Arg`
 The `clapp.Arg` object defines the following possible properties with descriptions of their use
+#### Name
+As discussed the name must be unique with no spaces
 ```python
-# As discussed the name must be unique with no spaces
 myarg = clapp.Arg('name')
+```
+#### `short` and `long` (i.e. `-h` and `--help` style)
+`short` and `long` define switches to denote the argument. You don't have to use both, you can use either one, or both.
 
-# `short` and `long` define switches to denote the argument
-# both are optional
-# Note: when defining a short, it must start with a leading '-'
-#       and contain only one letter
+Note: when defining a `short`, it must start with a leading `-` and contain only one letter
+Note 2: when defining a `long`, it must start with a leading `--` and contain no spaces
+```python
 myarg.short = '-d'
-# Note: when defining a long, it must start with a leading '--'
-#       and contain no spaces
 myarg.long = '--debug'
+```
 
-# When defining an action, your function should accept a dict
+#### Custom Handlers (a.k.a. `action` )
+When defining an action, your function should accept a `dict`
+```python
 myarg.action = some_func
+```
 
-# The help string that will be displayed when the user uses the -h or --help
+#### Help (`help`)
+The help string that will be displayed when the user uses the `-h` or `--help`
+
+```python
 myarg.help = 'Describe your argument or option here'
+```
+#### Positional Arguments (`index`)
+If defining a positional argument (i.e. no -f or --fake) you must not define a `short` or `long`
 
-# If defining a positional argument (i.e. no -f or --fake)
-# you must not define a `short` or `long`
-# Note: the index starts at 1 **NOT** 0
-# Note 2: The index specifies the relationship to other **POSITIONAL** arguments
-#         not arguments in general
+*Note*: the index starts at 1 **NOT** 0
+
+*Note 2*: The index specifies the relationship to other **POSITIONAL** arguments not arguments in general
+
+```python
 myarg.index = 1
+```
 
-# Defines if an argument is mandatory for your application to function
-# if you specify that an argument is mandatory, and the parser determines
-# that it was not found, your application will display the usage message
-# and exit (**WITHOUT** calling your main() if it is defined)
-#
-# Note: If you define a `short` or `long` and set this property to true
-#       you **MUST** also set the `args_taken` property to something
-#       greater than 0 (i.e. there is no such thing as mandatory flag
+#### Making Arguments Mandatory (`required`)
+Defines if an argument is mandatory for your application to function if you specify that an argument is mandatory, and the parser determines that it was not found, your application will display the usage message and exit (**WITHOUT** calling your main() if it is defined)
+
+*Note*: If you define a `short` or `long` and set this property to true you **MUST** also set the `args_taken` property to something greater than 0 (i.e. there is no such thing as mandatory flag
+
+```python
 myarg.required = False
+```
+#### Additional Arguments (`args_taken`)
+If your arguments needs additional positional arguments you can define how many to expect here. i.e. if you define a `-c <some_file>` you can set the `args_taken` to 1. When you choose a number greater than 0, all valid positional arguments directly following your switch (i.e. -c or whatever) will be stored in a list inside the context dict
 
-# If your arguments needs additional positional arguments you can define
-# how many to expect here.
-# i.e. if you define a -c <some_file> you can set the `args_taken` to 1
-# When you choose a number greater than 0, all valid positional arguments
-# directly following your switch (i.e. -c or whatever) will be stored
-# in a list inside the context dict
-#
-# Note: if your argument does not need additional arguments (i.e. it is a flag)
-#       and the user **DOES NOT** use the flag, it will still exist in your
-#       context dict, but the valid associated with it will be `False`
+*Note*: if your argument does not need additional arguments (i.e. it is a flag) and the user **DOES NOT** use the flag, it will still exist in your context `dict`, but the valid associated with it will be `False`
+
+```python
 myarg.args_taken = 2
 ```
 
