@@ -37,6 +37,7 @@ if __name__ == '__main__':
     app = clapp.App('My Super App')
     app.version = '1.0'
     app.about = 'Testing a command line app'
+    app.author = 'Kevin K. <kbknapp@gmail.com>'
     app.main = my_main
 
 
