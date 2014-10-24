@@ -296,6 +296,9 @@ when you look at your `context['-c']` the value will be `default.conf`. On the o
 $ myapp.py -c other.conf
 ```
 When you check the `context['-c']` the value will be `other.conf` 
+
+**Note**: You shouldn't set a default value for flags (i.e. Args that take no additional arguments, and are not positional) because they already default to `False`.
+
 #### Additional Arguments (`args_taken`)
 If your arguments needs additional positional arguments you can define how many to expect here. i.e. if you define a `-c <some_file>` you can set the `args_taken` to 1. When you choose a number greater than 0, all valid positional arguments directly following your switch (i.e. -c or whatever) will be stored in a list inside the context dict
 
