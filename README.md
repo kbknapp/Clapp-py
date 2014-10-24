@@ -101,8 +101,13 @@ The `dict` we're calling `context` here would look like this right after the `st
 }
 ```
 
-**Note**: the multiple keys that each argument value is stored under. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any).
-
+**Note**: The parsed data is stored under multiple keys. This is to give you options on how you wish to call for them, either by the name you defined, index (if any), short hand version (if any), or long hand version (if any). For example, if you wish to use the value that user passed in with the `-o` switch you can do any one of the following (they're all the same)
+```python
+user_val = context['-o']
+user_val = context['--output']
+user_val = context['out_file']
+```
+**Note**: Positional arguments can be called via their `name` or `index#` where `#` is whatever you set for `index` property.
 #### Other Methods for Argument Creation
 You can also define arguments using key-word arguments instead of properties. Or by using the `App.new_arg()` method.
 ```python
