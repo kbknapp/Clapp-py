@@ -497,7 +497,10 @@ class SubCommand(App):
     def __init__(self, name, version='', about='', main=_null_func):
         if not name or name.find(' ') != -1:
             raise RuntimeError('SubCommand must have a unique name with no spaces.')
-        App.__init__(self, name=name, version=version, about=about, main=main)
+        super(SubCommand, self).__init__(name)
+        self._version = version
+        self._about = about
+        self._main = main
 
     def start(self, args):
         """Called when the user wants to start processing command line arguments
