@@ -61,6 +61,7 @@ if __name__ == '__main__':
     arg2 = clapp.Arg('in_file')
     arg2.index = 1
     arg2.help = 'The input file'
+    arg2.default = 'some_file'
     # arg2.required = True
 
     # Creating a true/false flag is easy too

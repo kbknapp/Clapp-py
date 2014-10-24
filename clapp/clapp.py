@@ -112,6 +112,7 @@ class App(object):
                     pos_args += 1
                     index = 'index{}'.format(pos_args)
                     self._context[self._args_map[index].name] = arg
+                    self._context[index] = arg
                     arg = self._args_map[index].name
                 elif not possible_pos_args:
                     print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
@@ -166,6 +167,7 @@ class App(object):
                 else:
                     display_name = arg.short
                 print('Argument error.\nRequired option {} not found.'.format(display_name))
+
         for flag in self._flags:
             if flag.name not in self._context:
                 self._context[flag.name] = False
@@ -173,6 +175,16 @@ class App(object):
                     self._context[flag.short] = False
                 if flag.long:
                     self._context[flag.long] = False
+
+        for arg in set(self._args_map.values()):
+            if arg.default and arg.name not in self._context:
+                self._context[arg.name] = arg.default
+                if arg.short:
+                    self._context[arg.short] = arg.default
+                if arg.long:
+                    self._context[arg.long] = arg.default
+                if arg.index:
+                    self._context['index{}'.format(arg.index)] = arg.default
 
         for act in actions_todo:
             act(self._context)
@@ -312,6 +324,7 @@ class App(object):
                 long='',
                 short='',
                 help='',
+                default='',
                 action=_null_func,
                 index=0,
                 args_taken=0,
@@ -330,6 +343,7 @@ class App(object):
                   long=long,
                   short=short,
                   help=help,
+                  default=default,
                   action=action,
                   index=index,
                   args_taken=args_taken,
@@ -504,6 +518,7 @@ class SubCommand(App):
 
         if self._has_main:
             return self._main(self._context)
+        return self._context
 
 class Arg(object):
     def __init__(self,
@@ -511,6 +526,7 @@ class Arg(object):
                  short='',
                  long='',
                  help='',
+                 default='',
                  args_taken=0,
                  action=_null_func,
                  index=0,
@@ -522,6 +538,7 @@ class Arg(object):
             raise RuntimeError('Arg.short improper format. Must be "-h" style.')
         self._long = long
         self._help = help
+        self._default = default
         self._required = required
         self._has_action = False
         if action != _null_func:
@@ -534,6 +551,13 @@ class Arg(object):
     @property
     def name(self):
         return self._name
+
+    @property
+    def default(self):
+        return self._default
+    @default.setter
+    def default(self, value):
+        self._default = value
 
     @property
     def short(self):
