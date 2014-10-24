@@ -1,16 +1,13 @@
 # Clapp-py
 
-`clapp` (which stands for Command Line APPlication) is a very simple and minimal library for building command line applications and parsing command line arguments. `clapp` makes it easy to add command line switches, arguments, and sub-commands.
+`clapp` (which stands for Command Line APPlication) is a very simple and minimal library for building command line applications and parsing command line arguments. `clapp` makes it easy to add command line switches, arguments, and sub-commands to your applications. This allows you focus on what your application actually does, not worry about auxillary tasks.
 
 ## Installation
 Being that `clapp` is only a single small file the easiest way to "install" it is to just copy it to your project directory. Assuming you are already inside your project directory, you can use `curl` to download the latest copy.
 ```bash
 $ curl -LSso clapp.py https://github.com/kbknapp/Clapp-py/raw/master/clapp/clapp.py
 ```
-If you haven't already you may want to add a blank `__init__.py` file to your project directory as well (which turns your poject directly into a Python package).
-```bash
-$ touch __init__.py
-```
+That's it! You can now `import clapp` and start scripting!
 
 ## Use
 `clapp` gives you several things "for free" so to speak. You can use as many, or as few of the features as you need. The things you get for free (i.e. with only three lines of code) are typical unix-like help and version switches (`-h` / `--help` and`-v` / `--version` respecitivly). To get these features all you need to do is:
