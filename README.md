@@ -282,6 +282,20 @@ Defines if an argument is mandatory for your application to function if you spec
 ```python
 myarg.required = False
 ```
+#### Default Values (`default`)
+If you wish to provide a default value for your arguments, that is also possible. For this example, let's say you have a default config file that you parse when you load your program. But you want the user to be able to change that to a custom config file via a `-c some_file` switch. In this case you would set the `default` to the location of your default config file.
+```python
+config_arg.default = 'default.conf'
+```
+If you user leaves off the `-c some_file` switch, by running the script
+```bash
+$ myapp.py
+```
+when you look at your `context['-c']` the value will be `default.conf`. On the other hand, if the user runs the script via
+```bash
+$ myapp.py -c other.conf
+```
+When you check the `context['-c']` the value will be `other.conf` 
 #### Additional Arguments (`args_taken`)
 If your arguments needs additional positional arguments you can define how many to expect here. i.e. if you define a `-c <some_file>` you can set the `args_taken` to 1. When you choose a number greater than 0, all valid positional arguments directly following your switch (i.e. -c or whatever) will be stored in a list inside the context dict
 
