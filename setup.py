@@ -17,8 +17,15 @@ setup(
     description='A small package for easily creating'
                 ' command line applications',
     classifiers=[
+        'Environment :: Console',
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Programming Language :: Python',
+        'Programming Language :: Pyhthon :: 2',
         'Programming Language :: Python :: 3',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: POSIX :: Linux',
+        'Operating System :: Unix',
+        'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
 )
