@@ -14,7 +14,7 @@ import sys
 from os import path
 
 __version__ = '0.4.5'
-__build__ = '3'
+__build__ = '5'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -46,6 +46,8 @@ class App(object):
         self._version = version
         self._args_map = dict()
         self._raw_args = sys.argv
+        if self._raw_args[0][0] == '.' and self._raw_args[0][1] == '/':
+            self._raw_args[0] = self._raw_args[0][2:]
         self._about = about
         self._usage = usage
         self._has_main = False
