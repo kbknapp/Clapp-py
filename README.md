@@ -54,6 +54,7 @@ FLAGS:
 -v,--version		Display version information
 -h,--help		    Display help information
 ```
+Notice the usage string that displays how you can use the application. If you would like to use your own custom usage string instead, simply set the `usage` property. Otherwise, the application will build a usage string based off the possible arguments you've supplied.
 
 ### Adding Additional Arguments
 Most command line applications will want to add their own command line arguments in addition to the "for free" options that `clapp` provides. Adding those arguments is is as simple as creating a few objects and giving them to your application.
