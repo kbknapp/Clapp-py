@@ -3,6 +3,7 @@
 # Simply import the lib
 import clapp
 
+
 # This is used as the action when -o <file>
 # is passed to the app.
 # When options take additional arguments they
@@ -10,6 +11,7 @@ import clapp
 # a single value so [0] is used
 def do_output(context):
     print('-o was passed the file: ', context['-o'][0])
+
 
 def my_main(context):
     """ The starting point for your app."""
@@ -21,15 +23,17 @@ def my_main(context):
         print('Done!')
     return 0
 
+
 def super_crazy(context):
     print('super crazy actions happen here!')
+
 
 def super_main(context):
     print('My super sub command was called!')
 
 if __name__ == '__main__':
-    # Create an var of type clapp.App and set the properties
-    # Could also use App(name='MyApp', version='1.0', about='Example CLI application')
+    # Create a var of type clapp.App and set the properties
+    # Could also use App(name='MyApp', version='1.0', about='Example CLI...')
     # etc. etc.
     #
     # Your main() should accept a dict() with which is the context
@@ -39,14 +43,16 @@ if __name__ == '__main__':
     app.about = 'Testing a command line app'
     app.author = 'Kevin K. <kbknapp@gmail.com>'
     app.main = my_main
-
+    # If you use wish to use a custom usage string and not the pre-genned one
+    # use:
+    # app.usage = 'USAGE: myapp.py [-hv] | other...etc.'
 
     # Create a command line argument (can also use keyword arguments)
     # All actions should take one dict() as it will be passed a dict()
     # with context and will be executed PRIOR to your main()
     arg1 = clapp.Arg('out_file')
     arg1.short = '-o'
-    arg1.long ='--output'
+    arg1.long = '--output'
     arg1.args_taken = 1
     arg1.help = 'The output file'
     arg1.action = do_output

@@ -4,7 +4,7 @@ Python 2.x / 3.x
 
 clapp.py
 
-v0.4.4
+v0.4.5
 
 A library for building command line applications
 '''
@@ -13,8 +13,8 @@ from __future__ import print_function
 import sys
 from os import path
 
-__version__ = '0.4.4'
-__build__ = '2'
+__version__ = '0.4.5'
+__build__ = '3'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -25,14 +25,21 @@ def _null_func(context):
 
 class App(object):
     """The starting point for a command line application"""
-    def __init__(self, name='', version='', about='', author='', main=_null_func):
+    def __init__(self,
+                 name='',
+                 version='',
+                 usage='',
+                 about='',
+                 author='',
+                 main=_null_func):
         """Initializes a new version of the App class
         PARAMS:
             name: A string representing the name of the application
             version: A string representing the version of the application
             about: A string that displays what the application briefly doesn
-            main: A function which accepts a dict() and the starting point of the app
-                  will be called after all command line argumetns have been processed
+            main: A function which accepts a dict() and the starting point of
+                  the app will be called after all command line argumetns have
+                  been processed
         """
         self._name = name
         self._author = author
@@ -40,6 +47,7 @@ class App(object):
         self._args_map = dict()
         self._raw_args = sys.argv
         self._about = about
+        self._usage = usage
         self._has_main = False
         if main != _null_func:
             self._has_main = True
@@ -115,24 +123,33 @@ class App(object):
                     self._context[index] = arg
                     arg = self._args_map[index].name
                 elif not possible_pos_args:
-                    print('Argument error from {}\n{} doesn\'t accept positional arguments.'.format(arg, self._raw_args[0]))
+                    print('Argument error from {}\n{} doesn\'t accept '
+                          'positional arguments.'.format(arg,
+                                                         self._raw_args[0]))
                     self._display_usage(exit=True)
                 else:
-                    print('Argument error from {}\n{} doesn\'t accept any arguments like {}.'.format(arg, self._raw_args[0], arg))
+                    print('Argument error from {}\n{} doesn\'t accept any '
+                          'arguments like {}.'.format(arg,
+                                                      self._raw_args[0],
+                                                      arg))
                     self._display_usage(exit=True)
 
             argo = self._args_map[arg]
             if argo.args_taken:
                 if i+argo.args_taken == len(args):
-                    print('Argument error from {}\n{} expected {} arguments but received 0.'
-                              .format(arg, arg, argo.args_taken))
+                    print('Argument error from {}\n{} expected {} arguments '
+                          'but received 0.'.format(arg, arg, argo.args_taken))
                     self._display_usage(exit=True)
                 taken_args = []
                 for j in range(argo.args_taken):
                     possible_arg = args[i + 1 + j]
                     if possible_arg.startswith('-'):
-                        print('Argument error from {}\n{} expected {} arguments but received {}.'
-                              .format(possible_arg, arg, argo.args_taken, len(taken_args)))
+                        print('Argument error from {}\n{} expected {} '
+                              'arguments but '
+                              'received {}.'.format(possible_arg,
+                                                    arg,
+                                                    argo.args_taken,
+                                                    len(taken_args)))
                         self._display_usage(exit=True)
                     taken_args.append(possible_arg)
                 self._context[argo.name] = taken_args
@@ -156,7 +173,8 @@ class App(object):
                 act()
 
         if pos_args < len(self._req_pos_args):
-            print('Argument error.\nRequired number of positional arguments not found.')
+            print('Argument error.\nRequired number of positional arguments '
+                  'not found.')
             self._display_usage(exit=True)
 
         for arg in self._req_opts:
@@ -194,13 +212,20 @@ class App(object):
 
     def _display_usage(self, exit=True):
         ''' Displays usage of app based of flags and options
-        name.py [flags] <req_opts> [opt_opts] <req_positional_args> [opt_positional_args]
+        name.py [flags] <req_opts> [opt_opts] <req_positional_args>
+                [opt_positional_args]
         PARAMS:
             exit: Should sys.exit() be called at the conclusion of the function
         '''
+        if self._usage:
+            print(self._usage)
+            if exit:
+                sys.exit(0)
+
         usage_str = ''
         if self._flags:
-            usage_str += '[-{}]'.format(''.join([arg.short.strip('-') for arg in self._flags]))
+            usage_str += '[-{}]'.format(''.join([arg.short.strip('-')
+                                                for arg in self._flags]))
         if self._opts:
             usage_str += ' [{}]'.format(' '.join([' '.join([arg.short, arg.name]) for arg in self._opts]))
         if self._req_opts:
@@ -211,7 +236,8 @@ class App(object):
             usage_str += ' [{}]'.format(' '.join([arg.name for arg in self._pos_args]))
         if self._subcmds:
             usage_str += ' [SUBCOMMANDS]'
-        print('\nUSAGE:\n{} {}'.format(path.basename(self._raw_args[0]), usage_str))
+        print('\nUSAGE:\n{} {}'.format(path.basename(self._raw_args[0]),
+                                       usage_str))
         if exit:
             print('\nFor more information try --help')
             sys.exit(0)
@@ -269,7 +295,9 @@ class App(object):
         sys.exit(0)
 
     def _add_arg_to_map(self, arg):
-        """Builds a dict() of valid command line arguments based on Arg()s passed by the user."""
+        """Builds a dict() of valid command line arguments based on
+        Arg()s passed by the user.
+        """
         self._args_map[arg.name] = arg
         if arg.short:
             self._args_map[arg.short] = arg
@@ -352,12 +380,11 @@ class App(object):
         self._add_arg_to_map(arg)
 
     def new_subcommand_with_arg(self,
-                name,
-                arg,
-                about='',
-                version='',
-                main=_null_func,
-                ):
+                                name,
+                                arg,
+                                about='',
+                                version='',
+                                main=_null_func):
         """Create and add a clapp.Arg() to the application on the fly
         PARAMS:
             name: The unique name of the sub-command as a string
@@ -459,6 +486,7 @@ class App(object):
     @property
     def author(self):
         return self._author
+
     @author.setter
     def author(self, value):
         self._author = value
@@ -493,14 +521,30 @@ class App(object):
             self._has_main = True
         self._main = value
 
+    @property
+    def usage(self):
+        return self._usage
+
+    @usage.setter
+    def usage(self, value):
+        self._usage = value
+
+
 class SubCommand(App):
-    def __init__(self, name, version='', about='', main=_null_func):
+    def __init__(self,
+                 name,
+                 version='',
+                 about='',
+                 usage='',
+                 main=_null_func):
         if not name or name.find(' ') != -1:
-            raise RuntimeError('SubCommand must have a unique name with no spaces.')
+            raise RuntimeError('SubCommand must have a'
+                               'unique name with no spaces.')
         super(SubCommand, self).__init__(name)
         self._version = version
         self._about = about
         self._main = main
+        self._usage = usage
 
     def start(self, args):
         """Called when the user wants to start processing command line arguments
@@ -522,6 +566,7 @@ class SubCommand(App):
         if self._has_main:
             return self._main(self._context)
         return self._context
+
 
 class Arg(object):
     def __init__(self,
@@ -558,6 +603,7 @@ class Arg(object):
     @property
     def default(self):
         return self._default
+
     @default.setter
     def default(self, value):
         self._default = value
