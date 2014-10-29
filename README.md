@@ -61,7 +61,7 @@ Most command line applications will want to add their own command line arguments
 
 Let's say you want to allow users to pass an optional output file using either a `-o` or `--output` switch and the file name (**Note**: You do not need to use both a long and shorthand version of a switch). And you also want to  accept a mandatory positional argument, which is some input file your program needs to function. 
 
-In order to get the information back out of the those switches and arguemnts, start will return a dictionary filled with the parsed data.
+In order to get the information back out of the those switches and arguments, start will return a dictionary filled with the parsed data.
 ```python
 # When creating an instance of clapp.Arg() the name 
 # should be unique with no spaces
@@ -202,7 +202,7 @@ fake_cmd.about = 'Does really fake things'
 # If desired, we could even create a seperate main function
 fake_cmd.main = fake_main
 
-# We can then add additional arguemnts to fake if we wish
+# We can then add additional arguments to fake if we wish
 fake_crazy_arg = clapp.Arg('crazy')
 fake_crazy_arg.short = '-z'
 fake_crazy_arg.help = 'Turns on the crazy'
@@ -312,7 +312,7 @@ myarg.args_taken = 2
 ```
 If you set the `args_taken` greater than 0 (meaning it's expecting additional arguments), and **ALSO** define a `long` user can provide that additional argument in either `--long=argument` or `--long argument` styles. The end result is the same. I.e. the context `dict` will be populated as follows
 ```python
-# Assuming you created and arguemnt with a short -l, name 'longa', and long '--long'
+# Assuming you created and argument with a short -l, name 'longa', and long '--long'
 {
     '--long' : ['argument'],
     'longa' : 'argument'
