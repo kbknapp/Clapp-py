@@ -186,7 +186,8 @@ class App(object):
                     display_name = arg.long
                 else:
                     display_name = arg.short
-                print('Argument error.\nRequired option {} not found.'.format(display_name))
+                print('Argument error.\nRequired option {} not found.'
+                      .format(display_name))
 
         for flag in self._flags:
             if flag.name not in self._context:
@@ -229,13 +230,20 @@ class App(object):
             usage_str += '[-{}]'.format(''.join([arg.short.strip('-')
                                                 for arg in self._flags]))
         if self._opts:
-            usage_str += ' [{}]'.format(' '.join([' '.join([arg.short, arg.name]) for arg in self._opts]))
+            usage_str += ' [{}]'.format(' '.join([' '.join([arg.short,
+                                                            arg.name])
+                                                 for arg in self._opts]))
         if self._req_opts:
-            usage_str += ' <{}>'.format(' '.join([' '.join([arg.short, arg.name]) for arg in self._req_opts]))
+            usage_str += ' <{}>'.format(' '.join([' '.join([arg.short,
+                                                            arg.name])
+                                                 for arg in self._req_opts]))
         if self._req_pos_args:
-            usage_str += ' <{}>'.format(' '.join([arg.name for arg in self._req_pos_args]))
+            usage_str += ' <{}>'.format(' '
+                                        .join([arg.name
+                                               for arg in self._req_pos_args]))
         if self._pos_args:
-            usage_str += ' [{}]'.format(' '.join([arg.name for arg in self._pos_args]))
+            usage_str += ' [{}]'.format(' '.join([arg.name
+                                                 for arg in self._pos_args]))
         if self._subcmds:
             usage_str += ' [SUBCOMMANDS]'
         print('\nUSAGE:\n{} {}'.format(path.basename(self._raw_args[0]),
@@ -245,8 +253,10 @@ class App(object):
             sys.exit(0)
 
     def _display_help(self):
-        """Displays the possible command line arguemnts to the user and exits"""
-        print('\n{} v{}\n{}\n{}'.format(self.name, self.version, self.author, self.about))
+        """Displays the possible command line arguemnts to the user and
+        exits"""
+        print('\n{} v{}\n{}\n{}'.format(self.name, self.version, self.author,
+                                        self.about))
         self._display_usage(exit=False)
         if self._subcmds:
             print('\nSUB COMMANDS:')
@@ -320,7 +330,8 @@ class App(object):
                 self._flags.append(arg)
 
     def _add_subcmd_to_map(self, subcmd):
-        """Builds a dict() of valid command line arguments based on Arg()s passed by the user."""
+        """Builds a dict() of valid command line arguments based on Arg()s
+        passed by the user."""
         self._subcmds_map[subcmd.name] = subcmd
         self._subcmds.append(subcmd)
 
@@ -362,13 +373,20 @@ class App(object):
         """Create and add a clapp.Arg() to the application on the fly
         PARAMS:
             name: The unique name of the argument as a string
-            long: A string of the long version of the argument (if any) i.e. --help
-            short: A string of the short version of the argument (if any) i.e. -h
-            help: A help string about the argument displayed to the user when they use the --help
-            action: A handler to be called if the user calls this argument (must accept a dict())
-            index: Used for positional arguments (Note: 1 based, **NOT** 0 based)
-            args_taken: Int representing how many expected additional arguments i.e. -o <file>
-            required: Is this argument mandatory for proper script functionality?"""
+            long: A string of the long version of the argument (if any) i.e.
+                  --help
+            short: A string of the short version of the argument (if any)
+                   i.e. -h
+            help: A help string about the argument displayed to the user when
+                  they use the --help
+            action: A handler to be called if the user calls this argument
+                    (must accept a dict())
+            index: Used for positional arguments (Note: 1 based, **NOT** 0
+                   based)
+            args_taken: Int representing how many expected additional
+                        arguments i.e. -o <file>
+            required: Is this argument mandatory for proper script
+                      functionality?"""
         arg = Arg(name,
                   long=long,
                   short=short,
@@ -420,13 +438,20 @@ class App(object):
         PARAMS:
             name: The unique name of the sub-command as a string
             arg_name: A unique name of the sub-command argument as a string
-            long: A string of the long version of the argument (if any) i.e. --help
-            short: A string of the short version of the argument (if any) i.e. -h
-            help: A help string about the argument displayed to the user when they use the --help
-            action: A handler to be called if the user calls this argument (must accept a dict())
-            index: Used for positional arguments (Note: 1 based, **NOT** 0 based)
-            args_taken: Int representing how many expected additional arguments i.e. -o <file>
-            required: Is this argument mandatory for proper script functionality?"""
+            long: A string of the long version of the argument (if any) i.e.
+                  --help
+            short: A string of the short version of the argument (if any) i.e.
+                   -h
+            help: A help string about the argument displayed to the user when
+                  they use the --help
+            action: A handler to be called if the user calls this argument
+                    (must accept a dict())
+            index: Used for positional arguments (Note: 1 based, **NOT** 0
+                   based)
+            args_taken: Int representing how many expected additional
+                        arguments i.e. -o <file>
+            required: Is this argument mandatory for proper script
+                      functionality?"""
         subcmd = SubCommand(name, version=version, about=about, main=main)
         self.add_subcommand(subcmd)
 
@@ -585,7 +610,7 @@ class Arg(object):
             raise RuntimeError('Arg(name) must have a unique name string.')
         self._short = short
         if self._short and len(self._short) != 2:
-            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
+            raise RuntimeError('Arg.short wrong format. Must be "-h" style.')
         self._long = long
         self._help = help
         self._default = default
@@ -617,7 +642,7 @@ class Arg(object):
     @short.setter
     def short(self, value):
         if len(value) != 2:
-            raise RuntimeError('Arg.short improper format. Must be "-h" style.')
+            raise RuntimeError('Arg.short wrong format. Must be "-x" style.')
         if value:
             self._short = value
 
@@ -628,7 +653,7 @@ class Arg(object):
     @long.setter
     def long(self, value):
         if not value.startswith('--'):
-            raise RuntimeError('Arg.long improper format. Must be in "--help" style.')
+            raise RuntimeError('Arg.long wrong format. Must be "--xx" style.')
         self._long = value
 
     @property
