@@ -4,7 +4,7 @@ Python 2.x / 3.x
 
 clapp.py
 
-v0.4.5
+v0.4.6
 
 A library for building command line applications
 '''
@@ -13,8 +13,8 @@ from __future__ import print_function
 import sys
 from os import path
 
-__version__ = '0.4.5'
-__build__ = '5'
+__version__ = '0.4.6'
+__build__ = '1'
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 
 
@@ -198,14 +198,23 @@ class App(object):
                     self._context[flag.long] = False
 
         for arg in set(self._args_map.values()):
-            if arg.default and arg.name not in self._context:
-                self._context[arg.name] = arg.default
-                if arg.short:
-                    self._context[arg.short] = arg.default
-                if arg.long:
-                    self._context[arg.long] = arg.default
-                if arg.index:
-                    self._context['index{}'.format(arg.index)] = arg.default
+            if arg.name not in self._context:
+                if arg.default:
+                    self._context[arg.name] = arg.default
+                    if arg.short:
+                        self._context[arg.short] = arg.default
+                    if arg.long:
+                        self._context[arg.long] = arg.default
+                    if arg.index:
+                        self._context['index{}'.format(arg.index)] = arg.default
+                else:
+                    self._context[arg.name] = False
+                    if arg.short:
+                        self._context[arg.short] = False
+                    if arg.long:
+                        self._context[arg.long] = False
+                    if arg.index:
+                        self._context['index{}'.format(arg.index)] = False
 
         for act in actions_todo:
             act(self._context)
