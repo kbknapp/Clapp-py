@@ -57,3 +57,6 @@ target/
 # PyCharm
 .idea/
 
+# Sublime
+*.sublime-workspace
+*.sublime-project
